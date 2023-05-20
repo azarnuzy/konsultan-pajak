@@ -64,21 +64,21 @@ export const headingData = {
 }
 
 export const contentData = {
-  sideImg: '/sideImage.png',
+  sideImg: 'sideImg1.png',
   content1: {
     title: 'Get Your Benefit',
     subTitle:
       'Anda akan mendapat keuntungan atau benefit berikut jika menjadi client kami : ',
     subContents: [
       {
-        logo: 'engine',
+        logo: 'Intelligence.svg',
         title: '01',
         subtitle: 'Pengalaman Tinggi',
         description:
           'Berpengalaman dalam bidang perpajakan selama lebih dari 15 tahun baik sebagai konsultan pajak maupun auditor pada kantor akuntan publik yang pernah menangani klien dari berbagai jenis usaha yang berbeda baik sekala kecil maupun besar.',
       },
       {
-        logo: 'engine',
+        logo: 'Protect.svg',
         title: '01',
         subtitle: 'Pengalaman Tinggi',
         description:

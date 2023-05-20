@@ -115,12 +115,10 @@ function Navbar() {
         }}
       ></div>
       <div
-        className={`${
-          path === '/' ? 'absolute bg-transparent' : 'bg-light-red py-4'
-        } z-10  w-full top-4 lg:hidden transition duration-300 ease-in-out `}
+        className={` z-10  w-full py-2 lg:hidden bg-darkBlue transition duration-300 ease-in-out `}
       >
-        <div className='flex justify-between px-8'>
-          <h3 className='text-3xl italic text-light-dark font-bold tracking-wide'>
+        <div className='flex justify-between px-8 bg-darkBlue'>
+          <h3 className='text-3xl italic text-white font-bold tracking-wide'>
             Logo
           </h3>
           <div
@@ -129,7 +127,7 @@ function Navbar() {
             }}
             className='min-h-fit min-w-fit cursor-pointer'
           >
-            <HiMenu className='w-7 h-8 text-light-dark font-extrabold' />
+            <HiMenu className='w-7 h-8 text-white font-extrabold' />
           </div>
         </div>
         <div

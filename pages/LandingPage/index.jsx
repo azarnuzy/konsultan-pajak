@@ -1,3 +1,4 @@
+import Content from '@/components/LandingPage/Content'
 import Heading from '@/components/LandingPage/Heading'
 import MainLayout from '@/layouts/mainLayout'
 import WideLayout from '@/layouts/wideLayout'
@@ -8,6 +9,7 @@ function LandingPage() {
     <div>
       <WideLayout>
         <Heading />
+        <Content />
       </WideLayout>
     </div>
   )
