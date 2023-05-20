@@ -11,7 +11,10 @@ import {
 function OurTeam() {
   const data = ourTeam
   return (
-    <div className='w-full bg-light-gray flex justify-center items-center p-8'>
+    <div
+      id='our-team'
+      className='w-full bg-light-gray flex justify-center items-center p-8'
+    >
       <div className='max-w-7xl mx-auto my-8'>
         <h1 className='text-center font-bold text-2xl text-light-dark tracking-wider mb-8'>
           Our Team

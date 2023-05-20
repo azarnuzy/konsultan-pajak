@@ -157,19 +157,19 @@ export const ourTeam = [
 
 export const ourService = [
   {
-    logo: 'home',
+    logo: 'Organization.svg',
     title: 'Penyusunan Manual Pajak Perusahaan',
     description:
       'Membantu klien perusahaan menyusun pedoman perpajakan yang berisis kebijakan, strategi, prosedur, pelaporan, dan petunjuk teknis perhitungan pajak.',
   },
   {
-    logo: 'home',
+    logo: 'BlockChain.svg',
     title: 'Penyusunan Manual Pajak Perusahaan',
     description:
       'Membantu klien perusahaan menyusun pedoman perpajakan yang berisis kebijakan, strategi, prosedur, pelaporan, dan petunjuk teknis perhitungan pajak.',
   },
   {
-    logo: 'home',
+    logo: 'Scales.svg',
     title: 'Penyusunan Manual Pajak Perusahaan',
     description:
       'Membantu klien perusahaan menyusun pedoman perpajakan yang berisis kebijakan, strategi, prosedur, pelaporan, dan petunjuk teknis perhitungan pajak.',

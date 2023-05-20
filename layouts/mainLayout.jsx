@@ -11,7 +11,7 @@ const MainLayout = ({ children }) => {
   }, [])
 
   return (
-    <div className='min-h-screen bg-gray-100'>
+    <div className='min-h-screen bg-gray-100 scroll-smooth'>
       <SocialMedia />
       <Navbar />
       <main
