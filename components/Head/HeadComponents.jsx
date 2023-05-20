@@ -4,26 +4,42 @@ import React from 'react'
 function HeadComponent() {
   return (
     <Head>
-      <title>Konsultasi Pajak</title>
+      <meta charset='UTF-8' />
+      <meta
+        name='viewport'
+        content='width=device-width, initial-scale=1.0'
+      />
+      <meta
+        http-equiv='X-UA-Compatible'
+        content='ie=edge'
+      />
       <meta
         name='description'
-        content='Selamat datang di website SDN Ciwaregu 1! Dapatkan informasi tentang sekolah kami, program, acara, kurikulum, dan lainnya. Tetap terhubung dengan guru, siswa, dan orang tua kami.'
+        content='Konsultan Pajak yang menyediakan informasi dan jadwal konsultasi untuk kebutuhan perpajakan.'
       />
       <meta
         name='keywords'
-        content='sekolah dasar, pendidikan, siswa, guru, orang tua, program, acara, kurikulum, kegiatan, pembelajaran'
+        content='konsultan pajak, perpajakan, jadwal konsultasi'
       />
       <meta
         name='author'
-        content='M. Azar nuzy'
+        content='Nama Konsultan Pajak'
+      />
+      <meta
+        name='robots'
+        content='index, follow'
+      />
+      <meta
+        name='theme-color'
+        content='#ffffff'
       />
       <meta
         property='og:title'
-        content='SDN Ciwaregu 1'
+        content='Konsultan Pajak | Informasi dan Jadwal Konsultasi'
       />
       <meta
         property='og:description'
-        content='Selamat datang di website SDN Ciwaregu 1! Dapatkan informasi tentang sekolah kami, program, acara, kurikulum, dan lainnya. Tetap terhubung dengan guru, siswa, dan orang tua kami.'
+        content='Konsultan Pajak yang menyediakan informasi dan jadwal konsultasi untuk kebutuhan perpajakan.'
       />
       <meta
         property='og:type'
@@ -31,40 +47,29 @@ function HeadComponent() {
       />
       <meta
         property='og:url'
-        content='https://v1-dev-sdciwaregu.netlify.app/'
+        content='https://www.konsultasi-pajak.com/'
       />
       <meta
         property='og:image'
-        content='/images/header-1.jpg'
+        content='https://www.konsultasi-pajak.com/images/logo.png'
       />
       <meta
         property='twitter:title'
-        content='SDN Ciwaregu 1'
+        content='Konsultan Pajak | Informasi dan Jadwal Konsultasi'
       />
       <meta
         property='twitter:description'
-        content='Selamat datang di website SDN Ciwaregu 1! Dapatkan informasi tentang sekolah kami, program, acara, kurikulum, dan lainnya. Tetap terhubung dengan guru, siswa, dan orang tua kami.'
+        content='Konsultan Pajak yang menyediakan informasi dan jadwal konsultasi untuk kebutuhan perpajakan.'
       />
       <meta
         property='twitter:image'
-        content='/images/header-1.jpg'
-      />
-      <meta
-        name='twitter:creator'
-        content='@yourtwitterusername'
-      />
-      <meta
-        name='twitter:card'
-        content='summary_large_image'
-      />
-      <link
-        rel='canonical'
-        href='https://v1-dev-sdciwaregu.netlify.app/'
+        content='https://www.contohkonsultanpajak.com/images/logo.png'
       />
       <link
         rel='icon'
         href='/favicon.ico'
       />
+      <title>Konsultan Pajak | Informasi dan Jadwal Konsultasi</title>
     </Head>
   )
 }

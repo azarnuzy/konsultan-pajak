@@ -54,7 +54,7 @@ function OurClient() {
         {data.map((item, i) => (
           <SwiperSlide
             key={i}
-            className='mx-5'
+            className='mx-2 sm:mx-5'
           >
             <div className='w-[156px] h-[156px] flex items-center justify-center bg-light-gray '>
               {item.name}
