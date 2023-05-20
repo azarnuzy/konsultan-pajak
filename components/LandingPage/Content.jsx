@@ -23,10 +23,10 @@ function Content() {
           <p className='text-light-dark text-center'>
             {data.content1.subTitle}
           </p>
-          <div className='flex justify-center gap-4 my-3'>
+          <div className='flex flex-col md:flex-row justify-center gap-4 my-3'>
             {data.content1.subContents.map((item, i) => (
               <div
-                className='bg-lighBlue h-[400px] w-[345px] rounded-sm text-light-dark flex  justify-center p-5  items-center flex-col'
+                className='bg-lighBlue h-[400px] w-full md:w-[345px] rounded-xl text-light-dark flex  justify-center p-5  items-center flex-col'
                 key={i}
               >
                 <Image
@@ -44,17 +44,18 @@ function Content() {
           </div>
         </div>
       </div>
-      <div className='flex items-center gap-8'>
+      <div className='flex flex-col sm:flex-row items-center gap-8'>
         <div className='text-light-dark px-8'>
           <p className='block mb-3'>{data.content2.description.p1}</p>
           <p className='block'> {data.content2.description.p2}</p>
         </div>
-        <div className='w-fit'>
+        <div className='max-w-[200px] md:w-fit'>
           <Image
             src={`/images/${data.content2.sideImg}`}
             alt='Side Image 2'
             width={350}
             height={330}
+            className='object-cover'
           />
         </div>
       </div>

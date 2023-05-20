@@ -97,59 +97,59 @@ export const contentData = {
 
 export const ourTeam = [
   {
-    img: 'team1.png',
+    img: 'ourTeam1.png',
     name: 'BUDI INDRATNO, SE., M.Ak., BKP., CTAP.',
     position: 'Managing Partner',
     socialMedia: [
       {
         logo: 'linkedin',
-        link: '#',
+        link: 'https://facebook.com/',
       },
       {
         logo: 'facebook',
-        link: '#',
+        link: 'https://facebook.com/',
       },
       {
         logo: 'twitter',
-        link: '#',
+        link: 'https://facebook.com/',
       },
     ],
   },
   {
-    img: 'team1.png',
+    img: 'ourTeam2.png',
     name: 'BUDI INDRATNO, SE., M.Ak., BKP., CTAP.',
     position: 'Managing Partner',
     socialMedia: [
       {
         logo: 'linkedin',
-        link: '#',
+        link: 'https://linkedin.com/',
       },
       {
         logo: 'facebook',
-        link: '#',
+        link: 'https://linkedin.com/',
       },
       {
         logo: 'twitter',
-        link: '#',
+        link: 'https://linkedin.com/',
       },
     ],
   },
   {
-    img: 'team1.png',
+    img: 'ourTeam3.png',
     name: 'BUDI INDRATNO, SE., M.Ak., BKP., CTAP.',
     position: 'Managing Partner',
     socialMedia: [
       {
         logo: 'linkedin',
-        link: '#',
+        link: 'https://linkedin.com/',
       },
       {
         logo: 'facebook',
-        link: '#',
+        link: 'https://linkedin.com/',
       },
       {
         logo: 'twitter',
-        link: '#',
+        link: 'https://linkedin.com/',
       },
     ],
   },
