@@ -4,7 +4,7 @@ import React from 'react'
 function HeadComponent() {
   return (
     <Head>
-      <title>SDN Ciwaregu 1</title>
+      <title>Konsultasi Pajak</title>
       <meta
         name='description'
         content='Selamat datang di website SDN Ciwaregu 1! Dapatkan informasi tentang sekolah kami, program, acara, kurikulum, dan lainnya. Tetap terhubung dengan guru, siswa, dan orang tua kami.'
