@@ -1,5 +1,6 @@
 import Content from '@/components/LandingPage/Content'
 import Heading from '@/components/LandingPage/Heading'
+import OurClient from '@/components/LandingPage/OurClient'
 import OurServices from '@/components/LandingPage/OurServices'
 import OurTeam from '@/components/LandingPage/OurTeam'
 import MainLayout from '@/layouts/mainLayout'
@@ -14,6 +15,7 @@ function LandingPage() {
         <Content />
         <OurTeam />
         <OurServices />
+        <OurClient />
       </WideLayout>
     </div>
   )

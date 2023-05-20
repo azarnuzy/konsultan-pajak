@@ -179,39 +179,39 @@ export const ourService = [
 export const ourClient = [
   {
     logo: 'logoClient1.png',
-    name: 'logoClient',
+    name: 'Logo Client',
   },
   {
     logo: 'logoClient1.png',
-    name: 'logoClient',
+    name: 'Logo Client',
   },
   {
     logo: 'logoClient1.png',
-    name: 'logoClient',
+    name: 'Logo Client',
   },
   {
     logo: 'logoClient1.png',
-    name: 'logoClient',
+    name: 'Logo Client',
   },
   {
     logo: 'logoClient1.png',
-    name: 'logoClient',
+    name: 'Logo Client',
   },
   {
     logo: 'logoClient1.png',
-    name: 'logoClient',
+    name: 'Logo Client',
   },
   {
     logo: 'logoClient1.png',
-    name: 'logoClient',
+    name: 'Logo Client',
   },
   {
     logo: 'logoClient1.png',
-    name: 'logoClient',
+    name: 'Logo Client',
   },
   {
     logo: 'logoClient1.png',
-    name: 'logoClient',
+    name: 'Logo Client',
   },
 ]
 
