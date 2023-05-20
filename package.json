@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.14",
     "@next/font": "13.4.3",
     "axios": "^1.4.0",
     "eslint": "8.41.0",

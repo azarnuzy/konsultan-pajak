@@ -13,6 +13,10 @@ module.exports = {
       colors: {
         darkBlue: '#005ACD',
         lighBlue: '#BEF0FF',
+        'light-dark': '#222',
+      },
+      minHeight: {
+        'half-screen': '50vh',
       },
     },
   },

@@ -1,9 +1,7 @@
-import { useState, useEffect } from 'react'
-import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer/Footer'
+import Navbar from '@/components/Navbar/Navbar'
 import SocialMedia from '@/components/Navbar/SocialMedia'
-import Head from 'next/head'
-import HeadComponent from '@/components/Head/HeadComponents'
+import { useState, useEffect } from 'react'
 
 const MainLayout = ({ children }) => {
   const [isMounted, setIsMounted] = useState(false)
@@ -14,7 +12,6 @@ const MainLayout = ({ children }) => {
 
   return (
     <div className='min-h-screen bg-gray-100'>
-      <HeadComponent />
       <SocialMedia />
       <Navbar />
       <main
@@ -22,7 +19,7 @@ const MainLayout = ({ children }) => {
           isMounted ? 'opacity-100' : 'opacity-0'
         } w-full transition-opacity duration-500 ease-in-out mx-auto max-w-7xl px-4 sm:px-8 md:px-16 lg:px-24`}
       >
-        {children ? <></> : <div className='h-[70vh] w-full'></div>}
+        {children ? <></> : <div className='min-h-half-screen'></div>}
         {children}
       </main>
       <Footer />
