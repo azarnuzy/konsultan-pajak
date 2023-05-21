@@ -1,5 +1,6 @@
 import { headingData } from '@/helpers/landingPageData'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 function Heading() {
@@ -21,9 +22,12 @@ function Heading() {
         <div className='max-w-lg text-center text-gray-800'>
           <p>{data.description}</p>
         </div>
-        <button className='w-1/2 py-3 bg-transparent mt-8 border-solid border-gray-600 border-2 font-semibold rounded-md'>
+        <Link
+          href={'/jadwal-konsultasi'}
+          className='w-1/2 py-3 text-center bg-transparent mt-8 border-solid border-gray-600 border-2 font-semibold rounded-md'
+        >
           {data.button}
-        </button>
+        </Link>
       </div>
     </div>
   )
