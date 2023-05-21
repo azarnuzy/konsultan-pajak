@@ -2,6 +2,7 @@ import Image from 'next/image'
 import React from 'react'
 import { HiLocationMarker, HiMail } from 'react-icons/hi'
 import { FaUserEdit } from 'react-icons/fa'
+import Link from 'next/link'
 function Profile() {
   const data = {
     name: 'Joen Doe',
@@ -35,7 +36,12 @@ function Profile() {
           </div>
         </div>
         <div className='bg-darkBlue w-fit text-whtite font-semibold border border-solid border-darkBlue rounded-md px-6 py-2 flex gap-3 h-fit items-center'>
-          <h3 className='text-lg text-white'>Edit User</h3>
+          <Link
+            href={'/profile/edit'}
+            className='text-lg text-white'
+          >
+            Edit User
+          </Link>
           <div className='w-[30px] h-[30px] rounded-full border border-light-dark border-solid bg-white text-darkBlue flex justify-center pl-1 items-center shadow-sm'>
             <FaUserEdit className='w-5 h-5' />
           </div>

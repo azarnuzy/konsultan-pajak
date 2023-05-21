@@ -19,6 +19,8 @@ module.exports = {
         'light-dark': '#222',
         'light-gray': '#EFEFEF',
         'light-blue-2': '#F5FFFF',
+        'light-yellow': '#FB7B05',
+        'light-green': '#34A853',
       },
       minHeight: {
         'half-screen': '50vh',

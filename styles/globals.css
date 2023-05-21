@@ -28,3 +28,7 @@
 .form-container-1 {
   @apply border-[1px] border-solid border-black rounded-lg shadow-md bg-light-blue-2 p-3;
 }
+
+.form-title-1 {
+  @apply block uppercase tracking-wide text-gray-700 text-lg font-bold mb-2;
+}

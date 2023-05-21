@@ -96,7 +96,7 @@ export default function RiwayatKonsultasi() {
                     className='relative rounded-md p-3'
                   >
                     <div className='w-full border border-solid border-light-dark rounded-md'>
-                      <div className='border-b-2  border-solid border-light-dark w-full p-8 flex flex-col sm:flex-row gap-8 justify-between'>
+                      <div className='border-b-[1px]  border-solid border-light-dark w-full p-8 flex flex-col sm:flex-row gap-8 justify-between'>
                         <div className=' flex flex-col gap-6'>
                           <div className='text-light-dark flex gap-3'>
                             <FaSuitcase className='w-6 h-6' />

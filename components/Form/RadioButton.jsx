@@ -1,16 +1,21 @@
 import { useFormContext } from '@/context/form-context'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function RadioButton(props) {
   const data = props.data
-  const { kelengkapanData, setKelengkapanData } = useFormContext()
+  // const { kelengkapanData, setKelengkapanData } = useFormContext()
 
   // console.log(props.name)
+
   return (
     <>
       <label className='form-title'>{props.label}</label>
       <div className='flex justify-start flex-wrap gap-5 '>
         {data.map((item, i) => {
+          // console.log(item.value, props.kelengkapanData[props.name])
+          // console.log(
+          //   item.value === props.kelengkapanData[props.name] ? true : false
+          // )
           return (
             <div
               className='flex gap-3 items-center justify-center'
@@ -23,15 +28,17 @@ function RadioButton(props) {
                 {...props.register(item.name, {
                   required: true,
                   onChange: (e) => {
-                    console.log()
-                    setKelengkapanData({
-                      ...kelengkapanData,
+                    // console.log(e.target.value)
+                    props.setKelengkapanData({
+                      ...props.kelengkapanData,
                       [item.name]: e.target.value,
                     })
                   },
                 })}
                 checked={
-                  item.value === kelengkapanData[props.name] ? true : false
+                  item.value === props.kelengkapanData[props.name]
+                    ? true
+                    : false
                 }
               />
               <label
