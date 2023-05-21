@@ -40,15 +40,15 @@ export const navbarData = {
   navbars: [
     {
       label: 'Our Team',
-      link: '#our-team',
+      link: '/#our-team',
     },
     {
       label: 'Our Services',
-      link: '#our-services',
+      link: '/#our-services',
     },
     {
       label: 'Our Client',
-      link: '#our-client',
+      link: '/#our-client',
     },
     {
       label: 'Contact',

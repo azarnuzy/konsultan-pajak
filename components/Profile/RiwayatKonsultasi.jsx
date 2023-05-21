@@ -68,7 +68,7 @@ export default function RiwayatKonsultasi() {
               key={category}
               className={({ selected }) =>
                 classNames(
-                  'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-light-dark',
+                  'w-full rounded-lg py-2.5 text-sm font-semibold leading-5  text-light-dark',
                   'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
                   selected
                     ? 'bg-white shadow'
@@ -96,8 +96,8 @@ export default function RiwayatKonsultasi() {
                     className='relative rounded-md p-3'
                   >
                     <div className='w-full border border-solid border-light-dark rounded-md'>
-                      <div className='border-b-2  border-solid border-light-dark w-full p-8 flex justify-between'>
-                        <div className='flex flex-col gap-6'>
+                      <div className='border-b-2  border-solid border-light-dark w-full p-8 flex flex-col sm:flex-row gap-8 justify-between'>
+                        <div className=' flex flex-col gap-6'>
                           <div className='text-light-dark flex gap-3'>
                             <FaSuitcase className='w-6 h-6' />
                             <div className=''>
@@ -126,14 +126,14 @@ export default function RiwayatKonsultasi() {
                             </div>
                           </div>
                         </div>
-                        <div className='w-fit'>
+                        <div className='w-full  sm:w-fit overflow-hidden'>
                           <div className='flex gap-3'>
                             <HiLocationMarker className='w-6 h-6' />
                             <span className='font-semibold text-lg mb-3'>
                               Link Alamat (Gmaps)
                             </span>
                           </div>
-                          <span>
+                          <span className='text-ellipsis '>
                             https://google.maps/234dafwef.cawefawefagavwe/
                           </span>
                         </div>

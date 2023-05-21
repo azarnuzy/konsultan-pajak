@@ -17,7 +17,7 @@ const MainLayout = ({ children }) => {
       <main
         className={`${
           isMounted ? 'opacity-100' : 'opacity-0'
-        } w-full transition-opacity duration-500 ease-in-out mx-auto max-w-7xl sm:px-8 md:px-16 lg:px-24`}
+        } w-full transition-opacity duration-500 ease-in-out mx-auto px-4 max-w-7xl `}
       >
         {children ? <></> : <div className='min-h-half-screen'></div>}
         {children}

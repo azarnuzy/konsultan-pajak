@@ -34,7 +34,7 @@ function Navbar() {
   return (
     <>
       <div
-        className={` z-[1000]  hidden lg:block w-full px-8 transition duration-300 ease-in-out bg-lighBlue`}
+        className={` z-[1000] hidden lg:block w-full px-8 transition duration-300 ease-in-out bg-lighBlue`}
       >
         <div className='py-4 flex max-w-7xl lg:mx-auto justify-between  items-center '>
           <Link href={'/'}>
