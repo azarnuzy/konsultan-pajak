@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Tab } from '@headlessui/react'
+import { FaCalendarTimes, FaSuitcase } from 'react-icons/fa'
+import { HiLocationMarker } from 'react-icons/hi'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -70,7 +72,7 @@ export default function RiwayatKonsultasi() {
                   'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
                   selected
                     ? 'bg-white shadow'
-                    : 'text-light-dark hover:bg-white/[0.12] hover:text-white'
+                    : 'text-light-dark hover:bg-white/[0.12] hover:text-darkBlue'
                 )
               }
             >
@@ -91,9 +93,59 @@ export default function RiwayatKonsultasi() {
                 {posts.map((post) => (
                   <li
                     key={post.id}
-                    className='relative rounded-md p-3 hover:bg-gray-100'
+                    className='relative rounded-md p-3'
                   >
-                    <h3 className='text-sm font-medium leading-5'>
+                    <div className='w-full border border-solid border-light-dark rounded-md'>
+                      <div className='border-b-2  border-solid border-light-dark w-full p-8 flex justify-between'>
+                        <div className='flex flex-col gap-6'>
+                          <div className='text-light-dark flex gap-3'>
+                            <FaSuitcase className='w-6 h-6' />
+                            <div className=''>
+                              <h3 className='font-semibold text-lg mb-3'>
+                                Jasa Konsultasi
+                              </h3>
+                              <span>{post.title}</span>
+                            </div>
+                          </div>
+                          <div className='text-light-dark flex gap-3'>
+                            <FaCalendarTimes className='w-6 h-6' />
+                            <div className=''>
+                              <h3 className='font-semibold text-lg mb-3'>
+                                Tanggal & Waktu Konsultasi
+                              </h3>
+                              <span>{post.date}</span>
+                            </div>
+                          </div>
+                          <div className='text-light-dark flex gap-3'>
+                            <HiLocationMarker className='w-6 h-6' />
+                            <div className=''>
+                              <h3 className='font-semibold text-lg mb-3'>
+                                Jasa Konsultasi
+                              </h3>
+                              <span>{post.shareCount}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className='w-fit'>
+                          <div className='flex gap-3'>
+                            <HiLocationMarker className='w-6 h-6' />
+                            <span className='font-semibold text-lg mb-3'>
+                              Link Alamat (Gmaps)
+                            </span>
+                          </div>
+                          <span>
+                            https://google.maps/234dafwef.cawefawefagavwe/
+                          </span>
+                        </div>
+                      </div>
+                      <div className='flex justify-end p-8 gap-8'>
+                        <h4 className='text-lg font-medium'>
+                          Total Biaya Konsultasi
+                        </h4>
+                        <span className='text-lg font-medium'>Rp1.000.000</span>
+                      </div>
+                    </div>
+                    {/* <h3 className='text-sm font-medium leading-5'>
                       {post.title}
                     </h3>
 
@@ -103,7 +155,7 @@ export default function RiwayatKonsultasi() {
                       <li>{post.commentCount} comments</li>
                       <li>&middot;</li>
                       <li>{post.shareCount} shares</li>
-                    </ul>
+                    </ul> */}
 
                     <a
                       href='#'
