@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 const AdminVerificationContext = createContext({})
@@ -8,6 +8,20 @@ function AdminVerificationProvider({ children }) {
   const [searchTerm, setSearchTerm] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const [perPage] = useState(10)
+
+  // Fetch data from API
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('your-api-endpoint')
+        setData(response.data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    fetchData()
+  }, [])
 
   // Filter data based on search term
   const filteredData = data.filter((item) => {
