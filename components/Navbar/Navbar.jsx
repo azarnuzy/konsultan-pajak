@@ -97,7 +97,7 @@ function Navbar() {
                   </Link>
                   <Link
                     href='/register'
-                    className='bg-darkBlue p-2 px-5 rounded text-white px- text-sm'
+                    className='bg-white p-2 px-5 rounded text-darkBlue border-2 border-solid border-darkBlue px- text-sm'
                   >
                     register
                   </Link>

@@ -1,10 +1,10 @@
-import { useFormContext } from '@/context/form-context'
+// import { useFormContext } from '@/context/form-context'
 import React from 'react'
 
 function InputText(props) {
   // console.log(props.errors)
 
-  const { kelengkapanData, setKelengkapanData } = useFormContext()
+  // const { kelengkapanData, setKelengkapanData } = useFormContext()
   // console.log();
   return (
     <>
@@ -19,11 +19,11 @@ function InputText(props) {
         type={props.type}
         className='form-container'
         id={props.id}
-        value={kelengkapanData[props.name]}
+        value={props.kelengkapanData[props.name]}
         {...props.register(props.name, {
-          required: true,
+          required: props.required,
           onChange: (e) => {
-            setKelengkapanData({
+            props.setKelengkapanData({
               ...kelengkapanData,
               [props.name]: e.target.value,
             })

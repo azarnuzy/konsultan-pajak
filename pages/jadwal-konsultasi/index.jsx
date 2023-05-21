@@ -1,4 +1,4 @@
-import JadwalKonsultasi from '@/components/JadwalKonsultasi/jadwalKonsultasi'
+import JadwalKonsultasi from '@/components/JadwalKonsultasi/JadwalKonsultasi'
 import MainLayout from '@/layouts/mainLayout'
 import React from 'react'
 
