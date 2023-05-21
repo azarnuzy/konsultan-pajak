@@ -32,3 +32,11 @@
 .form-title-1 {
   @apply block uppercase tracking-wide text-gray-700 text-lg font-bold mb-2;
 }
+
+.container-tab {
+  @apply overflow-x-scroll  scrollbar-thumb-lighBlue scrollbar-thin scrollbar-track-slate-200 lg:scrollbar-track-transparent scrollbar-thumb-rounded;
+}
+
+.admin-title {
+  @apply text-light-dark text-xl font-medium mb-4;
+}

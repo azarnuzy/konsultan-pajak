@@ -21,11 +21,13 @@ module.exports = {
         'light-blue-2': '#F5FFFF',
         'light-yellow': '#FB7B05',
         'light-green': '#34A853',
+        'light-blue-3': '#3C4B64',
+        'light-gray-2': '#EDEEF1',
       },
       minHeight: {
         'half-screen': '50vh',
       },
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar')({ nocompatible: true })],
 }
