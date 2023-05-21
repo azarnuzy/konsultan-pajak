@@ -8,7 +8,7 @@ function Footer() {
   return (
     <div className='w-full  border-t-[1px] border-dotted border-light-red pt-10 bg-lighBlue'>
       <div className='max-w-7xl px-4 md:px-8 mb-10 md:gap-14 lg:gap-28 md:mx-auto flex flex-col md:flex-row gap-3'>
-        <div className='flex w-full sm:w-1/2  flex-col gap-4'>
+        <div className='hidden sm:flex w-full sm:w-1/2  flex-col gap-4'>
           <h3 className='text-xl font-bold uppercase tracking-wide'>
             {data.footer1.title}
           </h3>
