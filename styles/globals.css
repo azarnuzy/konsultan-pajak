@@ -24,3 +24,7 @@
 .form-title {
   @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2;
 }
+
+.form-container-1 {
+  @apply border-[1px] border-solid border-black rounded-lg shadow-md bg-light-blue-2 p-3;
+}

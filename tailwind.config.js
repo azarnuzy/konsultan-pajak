@@ -18,6 +18,7 @@ module.exports = {
         lighBlue: '#BEF0FF',
         'light-dark': '#222',
         'light-gray': '#EFEFEF',
+        'light-blue-2': '#F5FFFF',
       },
       minHeight: {
         'half-screen': '50vh',

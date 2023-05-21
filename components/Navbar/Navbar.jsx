@@ -17,6 +17,7 @@ import {
   HiMenu,
   HiOutlineLocationMarker,
   HiPhone,
+  HiUserCircle,
   HiX,
 } from 'react-icons/hi'
 function Navbar() {
@@ -55,7 +56,7 @@ function Navbar() {
                     onClick={() => setIsProfileOpen(!isProfileOpen)}
                     className=' py-2 rounded inline-flex items-center'
                   >
-                    <UserCircleIcon className='h-12 w-12 bg-gray-400 cursor-pointer rounded-full' />
+                    <HiUserCircle className='h-12 w-12 bg-gray-400 cursor-pointer rounded-full' />
                   </button>
                   <Transition
                     show={isProfileOpen}
