@@ -19,6 +19,10 @@ export function AuthProvider({ children }) {
   const [showUpload, setShowUpload] = useState(false)
   const [profileImage, setProfileImage] = useState()
 
+  const [consultRequest, setConsultRequest] = useState()
+  const [consultOngoing, setConsultOngoing] = useState()
+  const [consultDone, setConsultDone] = useState()
+
   const [open, setOpen] = React.useState(false)
   const eventDateRef = React.useRef(new Date())
   const timerRef = React.useRef(0)
@@ -30,6 +34,22 @@ export function AuthProvider({ children }) {
       // eventDateRef.current = oneWeekAway()
       setOpen(true)
     }, 100)
+  }
+
+  const getConsultCustomer = async (url, setData) => {
+    await axios
+      .get(`${process.env.NEXT_PUBLIC_API_URL}${url}`, {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        console.log(response)
+        setData(response.data.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   useEffect(() => {
@@ -54,6 +74,21 @@ export function AuthProvider({ children }) {
       setToken(storedToken)
     }
   }, [])
+
+  useEffect(() => {
+    if (user) {
+      // console.log(user._links)
+      getConsultCustomer(
+        user?._links?.['consult-request']?.href,
+        setConsultRequest
+      )
+      getConsultCustomer(
+        user?._links?.['consult-ongoing']?.href,
+        setConsultOngoing
+      )
+      getConsultCustomer(user?._links?.['consult-done']?.href, setConsultDone)
+    }
+  }, [user])
 
   const login = async (data) => {
     const url = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/login`
@@ -119,6 +154,12 @@ export function AuthProvider({ children }) {
     eventDateRef,
     timerRef,
     handleNotification,
+    consultRequest,
+    setConsultRequest,
+    consultOngoing,
+    setConsultOngoing,
+    consultDone,
+    setConsultDone,
   }
 
   return (

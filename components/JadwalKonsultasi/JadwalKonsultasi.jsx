@@ -35,7 +35,7 @@ function JadwalKonsultasi() {
   useEffect(() => {
     //   console.log(kelengkapanData)
     if (user) {
-      console.log(user.id)
+      // console.log(user.id)
       setKelengkapanData({
         ...kelengkapanData,
         cust_id: user?.id,
