@@ -8,18 +8,20 @@ import Image from 'next/image'
 import UploadImage from './UploadImage'
 import LoadingSpinner from '../Loading/LoadingSpinner'
 import axios from 'axios'
+import Notification from '../Loading/Notification'
+import { FaArrowLeft } from 'react-icons/fa'
 
 function EditProfile() {
   const [kelengkapanData, setKelengkapanData] = useState({
     name: '',
     npwp: '',
-    alamatWp: '',
-    namaPimpinan: '',
-    jabatanPimpinan: '',
+    address: '',
+    leader_name: '',
+    leader_title: '',
     pkp: '',
-    jenisUsaha: '',
-    namaAkunting: '',
-    nomorTelp: '',
+    business_type: '',
+    acc_name: '',
+    acc_telp: '',
   })
   const {
     register,
@@ -33,29 +35,36 @@ function EditProfile() {
     { id: 2, name: 'pkp', value: 'Tidak' },
   ]
 
-  const { user, handleUploadImage, token } = useAuth()
+  const { user, handleUploadImage, token, handleNotification } = useAuth()
   const [isLoading, setIsLoading] = useState(false)
+  const [message, setMessage] = useState()
+  const [status, setStatus] = useState()
 
-  console.log(user)
+  useEffect(() => {
+    // console.log(errors)
+    if (user) {
+      setKelengkapanData(user)
+    }
+  }, [user])
 
   const onSubmit = async (data) => {
-    // console.log(data)
+    console.log(data)
     setIsLoading(true)
     const formData = {
       name: data.name,
       npwp: data.npwp,
-      address: data.alamatWp,
-      leader_name: data.namaPimpinan,
-      leader_title: data.jabatanPimpinan,
+      address: data.address,
+      leader_name: data.leader_name,
+      leader_title: data.leader_title,
       pkp: data.pkp,
-      business_type: data.jenisUsaha,
-      acc_name: data.namaAkunting,
-      acc_telp: data.nomorTelp,
+      business_type: data.business_type,
+      acc_name: data.acc_name,
+      acc_telp: data.acc_telp,
     }
 
     await axios
       .put(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/customers/${user.id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/customers/${user.id}`,
         formData,
         {
           headers: {
@@ -64,12 +73,27 @@ function EditProfile() {
         }
       )
       .then((response) => {
-        console.log(response)
+        setStatus(response.status)
+        setMessage(response.data.message)
+        handleNotification()
+      })
+      .catch((error) => {
+        // console.log(error.response)
+        setStatus(error.response.status)
+        setMessage(error.response.data.message)
+        handleNotification()
+        // if (error.response.status) {
+        //   set
+        // }
       })
     setIsLoading(false)
   }
   return (
     <>
+      <Notification
+        message={message}
+        status={status}
+      />
       <LoadingSpinner
         isLoading={isLoading}
         setIsLoading={setIsLoading}
@@ -117,6 +141,13 @@ function EditProfile() {
                     Upload
                   </div>
                 </label>
+                <Link
+                  href={'/profile'}
+                  className='w-[183px] py-2 bg-light-green rounded-lg text-white font-semibold text-center flex gap-3 justify-center items-center'
+                >
+                  <FaArrowLeft />
+                  Back
+                </Link>
                 {/* <button className='w-[183px] py-2 bg-red-600 rounded-lg text-white font-semibold'>
                   Remove
                 </button> */}
@@ -160,9 +191,9 @@ function EditProfile() {
               <InputText
                 label='Alamat WP (Wajib Pajak)'
                 placeholder='Masukkan Alamat WP (Wajib Pajak)'
-                id='alamatWp'
-                name='alamatWp'
-                value={kelengkapanData['alamatWp']}
+                id='address'
+                name='address'
+                value={kelengkapanData['address']}
                 kelengkapanData={kelengkapanData}
                 setKelengkapanData={setKelengkapanData}
                 errors={errors}
@@ -175,9 +206,9 @@ function EditProfile() {
               <InputText
                 label='Nama Pimpinan (WP Badan)'
                 placeholder='Masukkan Nama Pimpinan (WP Badan)'
-                id='namaPimpinan'
-                name='namaPimpinan'
-                value={kelengkapanData['namaPimpinan']}
+                id='leader_name'
+                name='leader_name'
+                value={kelengkapanData['leader_name']}
                 kelengkapanData={kelengkapanData}
                 setKelengkapanData={setKelengkapanData}
                 errors={errors}
@@ -190,9 +221,9 @@ function EditProfile() {
               <InputText
                 label='Jabatan Pimpinan (WP Badan)'
                 placeholder='Masukkan Jabatan Pimpinan (WP Badan)'
-                id='jabatanPimpinan'
-                name='jabatanPimpinan'
-                value={kelengkapanData['jabatanPimpinan']}
+                id='leader_title'
+                name='leader_title'
+                value={kelengkapanData['leader_title']}
                 kelengkapanData={kelengkapanData}
                 setKelengkapanData={setKelengkapanData}
                 errors={errors}
@@ -219,9 +250,9 @@ function EditProfile() {
               <InputText
                 label='Jenis Usaha (Sesuai KLU)'
                 placeholder='Masukkan Jenis Usaha (Sesuai KLU)'
-                id='jenisUsaha'
-                name='jenisUsaha'
-                value={kelengkapanData['jenisUsaha']}
+                id='business_type'
+                name='business_type'
+                value={kelengkapanData['business_type']}
                 kelengkapanData={kelengkapanData}
                 setKelengkapanData={setKelengkapanData}
                 errors={errors}
@@ -234,9 +265,9 @@ function EditProfile() {
               <InputText
                 label='Nama Akunting'
                 placeholder='Masukkan Nama Akunting'
-                id='namaAkunting'
-                name='namaAkunting'
-                value={kelengkapanData['namaAkunting']}
+                id='acc_name'
+                name='acc_name'
+                value={kelengkapanData['acc_name']}
                 kelengkapanData={kelengkapanData}
                 setKelengkapanData={setKelengkapanData}
                 errors={errors}
@@ -249,9 +280,9 @@ function EditProfile() {
               <InputText
                 label='Nomor Telephone Akunting/Pajak/Admin'
                 placeholder='Masukkan Nomor Telephone Akunting/Pajak/Admin'
-                id='nomorTelp'
-                name='nomorTelp'
-                value={kelengkapanData['nomorTelp']}
+                id='acc_telp'
+                name='acc_telp'
+                value={kelengkapanData['acc_telp']}
                 kelengkapanData={kelengkapanData}
                 setKelengkapanData={setKelengkapanData}
                 errors={errors}
@@ -270,12 +301,6 @@ function EditProfile() {
               <button className='w-[228px] py-2 rounded-lg bg-light-green font-medium text-white'>
                 Reset Value
               </button>
-              <Link
-                href={'/profile'}
-                className='text-center w-[228px] py-2 rounded-lg bg-darkBlue font-medium text-white'
-              >
-                Back
-              </Link>
             </div>
           </div>
         </div>

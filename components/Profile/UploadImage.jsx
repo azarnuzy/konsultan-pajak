@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { MdClose } from 'react-icons/md'
 import LoadingSpinner from '../Loading/LoadingSpinner'
+import Notification from '../Loading/Notification'
 
 function UploadImage() {
   // let src = URL.createObjectURL(ProfileImage)
@@ -14,7 +15,7 @@ function UploadImage() {
     setUser,
     showUpload,
     setShowUpload,
-    handleUploadImage,
+    handleNotification,
     profileImage,
     token,
   } = useAuth()
@@ -28,6 +29,9 @@ function UploadImage() {
     }
   }, [profileImage])
 
+  const [message, setMessage] = useState()
+  const [status, setStatus] = useState()
+
   const uploadImage = async (data) => {
     setIsLoading(true)
     const formData = new FormData()
@@ -36,7 +40,7 @@ function UploadImage() {
     }
     await axios
       .put(
-        `${process.env.NEXT_PUBLIC_API_URL}/v1/images/${user?.user?.img_id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/images/${user?.user?.img_id}`,
         formData,
         {
           headers: {
@@ -59,8 +63,13 @@ function UploadImage() {
         })
         // console.log(user)
         // console.log(response)
+        setStatus(response.status)
+        setMessage(response.data.message)
+        handleNotification()
       })
       .catch((error) => {
+        // setStatus(error.response.status)
+        // setMessage(error.response.data.message)
         console.log(error)
       })
 
@@ -69,6 +78,10 @@ function UploadImage() {
   }
   return (
     <>
+      <Notification
+        message={message}
+        status={status}
+      />
       <LoadingSpinner
         isLoading={isLoading}
         setIsLoading={setIsLoading}

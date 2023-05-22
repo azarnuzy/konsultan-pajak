@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 import axios from 'axios'
 import { useRouter } from 'next/router'
@@ -19,12 +19,25 @@ export function AuthProvider({ children }) {
   const [showUpload, setShowUpload] = useState(false)
   const [profileImage, setProfileImage] = useState()
 
+  const [open, setOpen] = React.useState(false)
+  const eventDateRef = React.useRef(new Date())
+  const timerRef = React.useRef(0)
+
+  const handleNotification = () => {
+    setOpen(false)
+    window.clearTimeout(timerRef.current)
+    timerRef.current = window.setTimeout(() => {
+      // eventDateRef.current = oneWeekAway()
+      setOpen(true)
+    }, 100)
+  }
+
   useEffect(() => {
     const storedToken = Cookies.get('token')
     if (storedToken) {
       const getUser = async () => {
         await axios
-          .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/customers/1`, {
+          .get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/customers/1`, {
             headers: {
               Authorization: storedToken,
             },
@@ -43,7 +56,7 @@ export function AuthProvider({ children }) {
   }, [])
 
   const login = async (data) => {
-    const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/auth/login`
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/login`
 
     const res = await axios
       .post(url, data)
@@ -101,6 +114,11 @@ export function AuthProvider({ children }) {
     handleUploadImage,
     profileImage,
     setProfileImage,
+    open,
+    setOpen,
+    eventDateRef,
+    timerRef,
+    handleNotification,
   }
 
   return (
