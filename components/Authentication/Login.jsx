@@ -94,7 +94,7 @@ function Login() {
 
   return (
     <MainLayout>
-      <div className='justify-center sm:justify-normal flex gap-16 h-full  xl:h-[calc(100vh-361px)] items-center'>
+      <div className='justify-center sm:justify-normal flex gap-16 h-full  2xl:h-[calc(100vh-361px)] items-center'>
         <div className='justify-center w-1/2 hidden sm:flex'>
           <div className='sm:w-[400px] object-cover flex items-center justify-center'>
             <Image
