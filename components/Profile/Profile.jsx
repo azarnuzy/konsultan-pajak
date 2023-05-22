@@ -1,9 +1,12 @@
-import Image from 'next/image'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { HiLocationMarker, HiMail } from 'react-icons/hi'
 import { FaUserEdit } from 'react-icons/fa'
 import Link from 'next/link'
+import { useAuth } from '@/context/auth-context'
+import Image from 'next/image'
+
 function Profile() {
+  const { user } = useAuth()
   const data = {
     name: 'Joen Doe',
     email: 'joenDoe@gmail.com',
@@ -18,20 +21,34 @@ function Profile() {
       kontakAkunting: '+62xxxx-xxxx-xxxx',
     },
   }
+
+  useEffect(() => {
+    console.log(user)
+  }, [])
   return (
     <>
       <div className='flex flex-col items-center sm:flex-row sm:justify-between my-8 gap-8'>
         <div className='flex flex-col sm:flex-row gap-6 items-center'>
-          <div className='w-[100px] md:w-[200px] h-[100px] md:h-[200px] rounded-full bg-light-gray '></div>
+          <div className='w-[100px] md:w-[200px] h-[100px] md:h-[200px] rounded-full bg-light-gray object-cover object-center relative'>
+            <Image
+              src={
+                user?.user?.image?.imagekit_url || '/images/profileDefault.png'
+              }
+              alt='profile user'
+              fill
+              // objectFit=''
+              className='rounded-full '
+            />
+          </div>
           <div className='flex flex-col gap-4'>
-            <h3 className='text-xl font-semibold'>{data.name}</h3>
+            <h3 className='text-xl font-semibold'>{user?.name || 'xxx xxx'}</h3>
             <div className='flex gap-2'>
               <HiMail className='w-6 h-6 text-light-dark' />
-              <span>{data.email}</span>
+              <span>{user?.user?.email || 'xxx xxx'}</span>
             </div>
             <div className='flex gap-2'>
               <HiLocationMarker className='w-6 h-6 text-light-dark' />
-              <span>{data.address}</span>
+              <span>{user?.address || 'xxx xxx'}</span>
             </div>
           </div>
         </div>
@@ -67,7 +84,7 @@ function Profile() {
               Nama Pimpinan
             </td>
             <td className='py-4 px-6 text-sm text-gray-900'>
-              {data.detail.namaPimpinan}
+              {user?.leader_name || 'xxx xxx xxx xx'}
             </td>
           </tr>
           <tr>
@@ -75,13 +92,13 @@ function Profile() {
               Jabatan Pimpinan
             </td>
             <td className='py-4 px-6 text-sm text-gray-900'>
-              {data.detail.jabatanPimpinan}
+              {user?.leader_title || 'xxx xxx xxx xx'}
             </td>
           </tr>
           <tr>
             <td className='py-4 px-6 text-sm text-gray-500 font-medium'>PKP</td>
             <td className='py-4 px-6 text-sm text-gray-900'>
-              {data.detail.PKP}
+              {user?.pkp || 'xxx xxx xxx xx'}
             </td>
           </tr>
           <tr>
@@ -89,7 +106,7 @@ function Profile() {
               Jenis Usaha
             </td>
             <td className='py-4 px-6 text-sm text-gray-900'>
-              {data.detail.jenisUsaha}
+              {user?.business_type || 'xxx xxx xxx xx'}
             </td>
           </tr>
           <tr>
@@ -97,7 +114,7 @@ function Profile() {
               Nama Akunting
             </td>
             <td className='py-4 px-6 text-sm text-gray-900'>
-              {data.detail.namaAkunting}
+              {user?.acc_name || 'xxx xxx xxx xx'}
             </td>
           </tr>
           <tr>
@@ -105,7 +122,7 @@ function Profile() {
               Kontak Akunting
             </td>
             <td className='py-4 px-6 text-sm text-gray-900'>
-              {data.detail.kontakAkunting}
+              {user?.acc_telp || 'xxx xxx xxx xx'}
             </td>
           </tr>
         </tbody>

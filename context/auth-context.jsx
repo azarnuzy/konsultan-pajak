@@ -2,7 +2,6 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import { getData, getUser } from '@/lib/ApiServices'
 
 const AuthContext = createContext()
 
@@ -32,7 +31,7 @@ export function AuthProvider({ children }) {
             },
           })
           .then((response) => {
-            setUser(response.data.data.user)
+            setUser(response.data.data)
             return response
           })
           .catch((error) => {

@@ -61,7 +61,10 @@ function Navbar() {
                   >
                     <div className='h-12 w-12  cursor-pointer rounded-full '>
                       <Image
-                        src={`${user.image.imagekit_url}`}
+                        src={
+                          user?.user?.image?.imagekit_url ||
+                          '/images/profileDefault.png'
+                        }
                         alt='profile user'
                         width={48}
                         height={48}
