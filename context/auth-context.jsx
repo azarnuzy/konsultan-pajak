@@ -44,7 +44,7 @@ export function AuthProvider({ children }) {
         },
       })
       .then((response) => {
-        console.log(response)
+        // console.log(response)
         setData(response.data.data)
       })
       .catch((error) => {
