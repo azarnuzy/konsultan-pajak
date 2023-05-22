@@ -68,10 +68,7 @@ export default function RiwayatKonsultasi() {
           {Object.values(categories).map((posts, idx) => (
             <Tab.Panel
               key={idx}
-              className={classNames(
-                'rounded-xl bg-white p-3'
-                // 'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2'
-              )}
+              className={classNames('rounded-xl bg-white p-3')}
             >
               <ul>
                 {posts.length > 0 &&
