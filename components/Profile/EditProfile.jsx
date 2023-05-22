@@ -6,6 +6,8 @@ import Link from 'next/link'
 import { useAuth } from '@/context/auth-context'
 import Image from 'next/image'
 import UploadImage from './UploadImage'
+import LoadingSpinner from '../Loading/LoadingSpinner'
+import axios from 'axios'
 
 function EditProfile() {
   const [kelengkapanData, setKelengkapanData] = useState({
@@ -31,19 +33,50 @@ function EditProfile() {
     { id: 2, name: 'pkp', value: 'Tidak' },
   ]
 
-  const { user, setUser, showUpload, setShowUpload, handleUploadImage } =
-    useAuth()
+  const { user, handleUploadImage, token } = useAuth()
+  const [isLoading, setIsLoading] = useState(false)
 
-  const handleDeleteImage = () => {}
+  console.log(user)
 
-  // const handleUploadImage = () => {}
+  const onSubmit = async (data) => {
+    // console.log(data)
+    setIsLoading(true)
+    const formData = {
+      name: data.name,
+      npwp: data.npwp,
+      address: data.alamatWp,
+      leader_name: data.namaPimpinan,
+      leader_title: data.jabatanPimpinan,
+      pkp: data.pkp,
+      business_type: data.jenisUsaha,
+      acc_name: data.namaAkunting,
+      acc_telp: data.nomorTelp,
+    }
 
-  const onSubmit = () => {}
+    await axios
+      .put(
+        `${process.env.NEXT_PUBLIC_API_URL}/v1/customers/${user.id}`,
+        formData,
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response)
+      })
+    setIsLoading(false)
+  }
   return (
     <>
+      <LoadingSpinner
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
+      />
       <UploadImage />
       <form
-        onSubmit={handleSubmit()}
+        onSubmit={handleSubmit(onSubmit)}
         className='flex  flex-col sm:flex-row gap-8 my-4 px-2 sm:px-16'
       >
         <div className='flex flex-col gap-8 w-full '>
@@ -123,19 +156,21 @@ function EditProfile() {
               />
               <div className='mb-5'></div>
             </div>
-            <InputText
-              label='Alamat WP (Wajib Pajak)'
-              placeholder='Masukkan Alamat WP (Wajib Pajak)'
-              id='alamatWp'
-              name='alamatWp'
-              value={kelengkapanData['alamatWp']}
-              kelengkapanData={kelengkapanData}
-              setKelengkapanData={setKelengkapanData}
-              errors={errors}
-              register={register}
-              errorText={'Alamat WP (Wajib Pajak) Harus Diisi'}
-              required={true}
-            />
+            <div className='mb-5'>
+              <InputText
+                label='Alamat WP (Wajib Pajak)'
+                placeholder='Masukkan Alamat WP (Wajib Pajak)'
+                id='alamatWp'
+                name='alamatWp'
+                value={kelengkapanData['alamatWp']}
+                kelengkapanData={kelengkapanData}
+                setKelengkapanData={setKelengkapanData}
+                errors={errors}
+                register={register}
+                errorText={'Alamat WP (Wajib Pajak) Harus Diisi'}
+                required={true}
+              />
+            </div>
             <div className='mb-5'>
               <InputText
                 label='Nama Pimpinan (WP Badan)'
@@ -155,9 +190,9 @@ function EditProfile() {
               <InputText
                 label='Jabatan Pimpinan (WP Badan)'
                 placeholder='Masukkan Jabatan Pimpinan (WP Badan)'
-                id='namaPimpinan'
-                name='namaPimpinan'
-                value={kelengkapanData['namaPimpinan']}
+                id='jabatanPimpinan'
+                name='jabatanPimpinan'
+                value={kelengkapanData['jabatanPimpinan']}
                 kelengkapanData={kelengkapanData}
                 setKelengkapanData={setKelengkapanData}
                 errors={errors}

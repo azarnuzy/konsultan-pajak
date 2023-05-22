@@ -24,7 +24,7 @@ function InputText(props) {
           required: props.required,
           onChange: (e) => {
             props.setKelengkapanData({
-              ...kelengkapanData,
+              ...props.kelengkapanData,
               [props.name]: e.target.value,
             })
           },
