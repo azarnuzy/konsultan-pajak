@@ -1,7 +1,7 @@
 import Pagination from '@/components/Generals/Pagination/Pagination'
 import SearchBar from '@/components/Generals/SearchBar/Search'
 import Table from '@/components/Generals/Table/Table'
-import AdminVerificationProvider from '@/context/auth-consultant-request'
+import AdminVerificationProvider from '@/context/consultant-request-context'
 import AdminLayout from '@/layouts/adminLayout'
 import React from 'react'
 

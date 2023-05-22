@@ -12,6 +12,7 @@ export default function Register() {
     handleSubmit,
     formState: { errors },
     watch,
+    setError,
   } = useForm()
 
   const router = useRouter()
@@ -25,36 +26,44 @@ export default function Register() {
 
   const validateEmail = (value) => {
     if (!value) {
-      return 'Email Harus Diisi'
+      return 'Email is required'
     }
     // Regular expression for email validation
     const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
     // console.log(!emailRegex.test(value))
     if (!emailRegex.test(value)) {
-      return 'Format Email Salah'
+      return 'Invalid email format'
     }
     return true
   }
 
   const validatePassword = (value) => {
     if (!value) {
-      return 'Password Harus Diisi'
+      return 'Password is required'
     }
     // Regular expression for password validation
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d.*\d)[A-Za-z\d]{8,}$/
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
     if (!passwordRegex.test(value)) {
-      return 'Password harus mengandung 8 karakter, 1 kapital, dan 2 nomor'
+      return 'Password must be at least 8 characters long, containing at least one letter and one number'
     }
     return true
   }
 
   const onSubmit = async (data) => {
     // console.log(data)
+    const { email, password } = data
     setIsLoading(true)
-    const response = await registerAcc(data)
+    const response = await registerAcc({ name, email, password })
 
-    console.log(response)
+    if (response.message.includes('exist')) {
+      setError('email', {
+        type: 'manual',
+        message: response.message,
+      })
+    }
+    // console.log(response)
     router.push('/login')
+
     setIsLoading(false)
   }
 
@@ -64,7 +73,7 @@ export default function Register() {
         isLoading={isLoading}
         setIsLoading={setIsLoading}
       />
-      <div className='justify-center sm:justify-normal flex gap-16 h-[calc(100vh-289px)] sm:h-[calc(100vh-361px)] items-center'>
+      <div className='justify-center sm:justify-normal flex gap-16 h-[calc(100vh-289px)] sm:h-full xl:h-[calc(100vh-361px)] items-center m-3'>
         <div className='justify-center w-1/2 hidden sm:flex'>
           <div className='sm:w-[400px] object-cover flex items-center justify-center'>
             <Image
@@ -189,7 +198,7 @@ export default function Register() {
                     setConfirmPassword(e.target.value)
                   },
                   validate: (value) =>
-                    value === watch('password') || 'Passwords tidak sama',
+                    value === watch('password') || 'Passwords do not match',
                   required: true,
                 })}
               />

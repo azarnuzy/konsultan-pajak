@@ -1,4 +1,4 @@
-import { useAdminVerificationContext } from '@/context/auth-consultant-request'
+import { useAdminVerificationContext } from '@/context/consultant-request-context'
 
 const SearchBar = () => {
   const { searchTerm, handleSearchTermChange } = useAdminVerificationContext()
