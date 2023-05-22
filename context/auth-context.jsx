@@ -13,15 +13,14 @@ export function AuthProvider({ children }) {
   const router = useRouter()
 
   const [token, setToken] = useState(null)
-  // const [userId, setUserId] = useState()
   const [previousPath, setPreviousPath] = useState('/')
   const [user, setUser] = useState()
 
+  const [showUpload, setShowUpload] = useState(false)
+  const [profileImage, setProfileImage] = useState()
+
   useEffect(() => {
     const storedToken = Cookies.get('token')
-    // console.log('render page')
-    // console.log(storedToken)
-
     if (storedToken) {
       const getUser = async () => {
         await axios
@@ -66,8 +65,6 @@ export function AuthProvider({ children }) {
         console.log(err)
         return err
       })
-    // console.log(res)
-    // return res.data
     return res.response
   }
 
@@ -76,6 +73,12 @@ export function AuthProvider({ children }) {
     setToken(null)
     Cookies.remove('token')
     router.push('/')
+  }
+
+  const handleUploadImage = (e) => {
+    // console.log(e)
+    setProfileImage(e.target.files[0])
+    setShowUpload(true)
   }
 
   const isAuthenticated = async () => {
@@ -93,6 +96,11 @@ export function AuthProvider({ children }) {
     setPreviousPath,
     user,
     setUser,
+    showUpload,
+    setShowUpload,
+    handleUploadImage,
+    profileImage,
+    setProfileImage,
   }
 
   return (
