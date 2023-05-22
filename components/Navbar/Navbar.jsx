@@ -4,7 +4,7 @@ import { Transition } from '@headlessui/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   AiFillFacebook,
   AiFillInstagram,
@@ -26,9 +26,8 @@ function Navbar() {
   const router = useRouter()
   const data = navbarData
   const data2 = socialMedia
-  const { token, logout, user } = useAuth()
+  const { token, logout, user, userInfo } = useAuth()
 
-  // console.log(user)
   const path = router.pathname
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isProfileOpen, setIsProfileOpen] = useState(false)

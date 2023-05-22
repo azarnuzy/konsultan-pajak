@@ -10,7 +10,7 @@ function classNames(...classes) {
 }
 
 export default function RiwayatKonsultasi() {
-  const { consultRequest, consultOngoing, consultDone } = useAuth()
+  const { consultRequest, consultOngoing, consultDone, user } = useAuth()
 
   let [categories, setCategories] = useState({
     'Menunggu Verifikasi': [],
@@ -24,7 +24,8 @@ export default function RiwayatKonsultasi() {
       'Sedang Berjalan': consultOngoing,
       Selesai: consultDone,
     })
-    console.log(consultRequest)
+    console.log(user)
+    // console.log(consultRequest)
   }, [consultRequest, consultOngoing, consultDone])
 
   const convertDate = (inputDate) => {
@@ -71,7 +72,7 @@ export default function RiwayatKonsultasi() {
               className={classNames('rounded-xl bg-white p-3')}
             >
               <ul>
-                {posts.length > 0 &&
+                {posts?.length > 0 &&
                   posts?.map((item) => (
                     <li
                       key={item.id}
@@ -142,7 +143,7 @@ export default function RiwayatKonsultasi() {
                       />
                     </li>
                   ))}
-                {posts.length === 0 && (
+                {!posts && (
                   <div className='flex justify-center'>
                     <div className='w-full h-full sm:w-[450px] sm:h-[560px] object-cover'>
                       <Image

@@ -15,6 +15,7 @@ export function AuthProvider({ children }) {
   const [token, setToken] = useState(null)
   const [previousPath, setPreviousPath] = useState('/')
   const [user, setUser] = useState()
+  const [userInfo, setUserInfo] = useState()
 
   const [showUpload, setShowUpload] = useState(false)
   const [profileImage, setProfileImage] = useState()
@@ -52,6 +53,28 @@ export function AuthProvider({ children }) {
       })
   }
 
+  const getUserInfo = async () => {
+    await axios
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/${user.id}`, {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        // console.log(response)
+        if (
+          response.data.data.role_id === 1 ||
+          response.data.data.role_id === 2
+        ) {
+          router.push('/admin')
+        }
+        setUserInfo(response.data)
+      })
+      .catch((error) => {
+        // console.log(error)
+      })
+  }
+
   useEffect(() => {
     const storedToken = Cookies.get('token')
     if (storedToken) {
@@ -63,6 +86,7 @@ export function AuthProvider({ children }) {
             },
           })
           .then((response) => {
+            console.log(response)
             setUser(response.data.data)
             return response
           })
@@ -73,11 +97,12 @@ export function AuthProvider({ children }) {
       getUser()
       setToken(storedToken)
     }
-  }, [])
+  }, [token])
 
   useEffect(() => {
     if (user) {
       // console.log(user._links)
+      getUserInfo()
       getConsultCustomer(
         user?._links?.['consult-request']?.href,
         setConsultRequest
@@ -119,6 +144,12 @@ export function AuthProvider({ children }) {
   const logout = () => {
     // console.log('logout')
     setToken(null)
+    setUser({})
+    setToken()
+    setProfileImage()
+    setConsultRequest()
+    setConsultOngoing()
+    setConsultDone()
     Cookies.remove('token')
     router.push('/')
   }
@@ -160,6 +191,8 @@ export function AuthProvider({ children }) {
     setConsultOngoing,
     consultDone,
     setConsultDone,
+    userInfo,
+    setUserInfo,
   }
 
   return (

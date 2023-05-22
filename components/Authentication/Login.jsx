@@ -54,6 +54,7 @@ function Login() {
   const onSubmit = async (data) => {
     setIsLoading(true)
     const response = await login(data)
+    // console.log(response)
     // console.log(response?.data)
     setIsLoading(false)
     if (response?.data) {
@@ -71,8 +72,7 @@ function Login() {
         }
       }
 
-      // console.log(response)
-
+      // if(response.data)
       // if (previousPath !== '/') {
       //   router.push(`${previousPath}`)
       // } else {
@@ -88,6 +88,7 @@ function Login() {
       // }
       setPreviousPath('/')
     } else {
+      // console.log(response)
       router.push('/')
     }
   }
