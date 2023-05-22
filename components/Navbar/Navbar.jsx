@@ -1,6 +1,7 @@
 import { useAuth } from '@/context/auth-context'
 import { navbarData, socialMedia } from '@/helpers/landingPageData'
 import { Transition } from '@headlessui/react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
@@ -25,16 +26,18 @@ function Navbar() {
   const router = useRouter()
   const data = navbarData
   const data2 = socialMedia
-  const { token, logout } = useAuth()
+  const { token, logout, user } = useAuth()
 
-  // console.log(token)
+  // console.log(user)
   const path = router.pathname
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isProfileOpen, setIsProfileOpen] = useState(false)
   return (
     <>
       <div
-        className={` z-[1000] hidden lg:block w-full px-8 transition duration-300 ease-in-out bg-lighBlue`}
+        className={` z-[1000] hidden lg:block w-full px-8 transition duration-300 ease-in-out ${
+          path === '/' ? 'absolute bg-lighBlue' : 'bg-lighBlue'
+        }`}
       >
         <div className='py-4 flex max-w-7xl lg:mx-auto justify-between  items-center '>
           <Link href={'/'}>
@@ -50,13 +53,22 @@ function Navbar() {
             ))}
             <li className='flex gap-2'>
               {token ? (
-                <div className='relative'>
+                <div className=''>
                   <button
                     onMouseEnter={() => setIsProfileOpen(true)}
                     onClick={() => setIsProfileOpen(!isProfileOpen)}
                     className=' py-2 rounded inline-flex items-center'
                   >
-                    <HiUserCircle className='h-12 w-12 bg-gray-400 cursor-pointer rounded-full' />
+                    <div className='h-12 w-12  cursor-pointer rounded-full '>
+                      <Image
+                        src={`${user.image.imagekit_url}`}
+                        alt='profile user'
+                        width={48}
+                        height={48}
+                        className='rounded-full'
+                      />
+                    </div>
+                    {/* <HiUserCircle className='h-12 w-12 bg-white cursor-pointer rounded-full text-darkBlue' /> */}
                   </button>
                   <Transition
                     show={isProfileOpen}
@@ -66,14 +78,18 @@ function Navbar() {
                     leave='transition ease-in duration-75'
                     leaveFrom='transform opacity-100 scale-100'
                     leaveTo='transform opacity-0 scale-95'
+                    className={''}
                   >
                     <div
-                      className='absolute right-0 py-2 w-36 bg-white rounded-md shadow-lg  flex flex-col'
+                      className='absolute right-0 py-2 w-36 bg-white rounded-md shadow-lg  flex flex-col z-50'
                       onMouseEnter={() => setIsProfileOpen(true)}
-                      onMouseLeave={() => setIsProfileOpen(false)}
+                      onMouseLeave={() => {
+                        // console.log('leave')
+                        setIsProfileOpen(false)
+                      }}
                     >
                       <Link
-                        href={'/akun'}
+                        href={'/profile'}
                         className='w-full text-start block px-4 py-2 text-sm rounded-md text-gray-700 hover:bg-gray-100 cursor-pointer'
                       >
                         Profile

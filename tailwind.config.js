@@ -11,7 +11,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        hero: "url('/public/images/header.png')",
+        hero: "url('/images/header2.png')",
       },
       colors: {
         darkBlue: '#005ACD',

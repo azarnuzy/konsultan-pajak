@@ -3,8 +3,9 @@ import MainLayout from '@/layouts/mainLayout'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import LoadingSpinner from '../Loading/LoadingSpinner'
 
 function Login() {
   const {
@@ -46,41 +47,48 @@ function Login() {
     return true
   }
 
+  // useEffect(() => {
+  //   console.log(errors)
+  // }, [errors])
+
   const onSubmit = async (data) => {
     setIsLoading(true)
     const response = await login(data)
-    console.log(response)
+    // console.log(response?.data)
     setIsLoading(false)
-    if (response) {
-      if (!response?.status) {
-        if (response?.message?.includes('Email')) {
+    if (response?.data) {
+      if (response?.data.status) {
+        if (response?.data.message?.includes('User')) {
           setError('email', {
             type: 'manual',
-            message: 'Email Salah',
+            message: response?.data.message,
           })
         } else {
           setError('password', {
             type: 'manual',
-            message: 'Password Salah',
+            message: response?.data.message,
           })
         }
       }
+
       // console.log(response)
 
-      if (previousPath !== '/') {
-        router.push(`${previousPath}`)
-      } else {
-        if (
-          response?.data?.role === 'Admin' ||
-          response?.data?.role === 'Teachers'
-        ) {
-          router.push('/admin')
-        }
-        if (response?.data?.role === 'Users') {
-          router.push('/')
-        }
-      }
+      // if (previousPath !== '/') {
+      //   router.push(`${previousPath}`)
+      // } else {
+      //   if (
+      //     response?.data?.role === 'Admin' ||
+      //     response?.data?.role === 'Teachers'
+      //   ) {
+      //     router.push('/admin')
+      //   }
+      //   if (response?.data?.role === 'Users') {
+      //     router.push('/')
+      //   }
+      // }
       setPreviousPath('/')
+    } else {
+      router.push('/')
     }
   }
 
@@ -184,6 +192,10 @@ function Login() {
           </form>
         </div>
       </div>
+      <LoadingSpinner
+        setIsLoading={setIsLoading}
+        isLoading={isLoading}
+      />
     </MainLayout>
   )
 }

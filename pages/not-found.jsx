@@ -20,7 +20,7 @@ function NotFound({ statusCode }) {
   return (
     <MainLayout>
       <div className='flex items-center justify-center text-2xl text-light-dark gap-3 font-bold h-[calc(100vh-363px)]'>
-        <FaExclamationCircle /> {errorMessages()}
+        <FaExclamationCircle /> 404 - Page Not Found
       </div>
     </MainLayout>
   )

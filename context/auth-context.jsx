@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 import axios from 'axios'
 import { useRouter } from 'next/router'
+import { getData, getUser } from '@/lib/ApiServices'
 
 const AuthContext = createContext()
 
@@ -12,77 +13,52 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const router = useRouter()
 
-  // Request interceptor
-  axios.interceptors.request.use(
-    (config) => {
-      // Modify the request config here (e.g., adding headers, modifying data)
-      return config
-    },
-    (error) => {
-      // Handle request error
-      return Promise.reject(error)
-    }
-  )
-
-  // Response interceptor
-  axios.interceptors.response.use(
-    (response) => {
-      // Process the response data here (e.g., transform response, handle success)
-      return response
-    },
-    (error) => {
-      // Handle response error based on the status code
-      if (error.response) {
-        const { status } = error.response
-
-        // Redirect to the appropriate page based on the status code
-        if (status === 401) {
-          // Unauthorized - Redirect to the unauthorized page
-          router.push('/unauthorized')
-        } else if (status === 403) {
-          // Forbidden - Redirect to the home page
-          router.push('/forbidden')
-        } else if (status === 404) {
-          // Not Found - Redirect to the error page
-          router.push('/not-found')
-        } else if (status === 500) {
-          // Internal Server Error - Redirect to the error page
-          router.push('/error')
-        }
-      }
-
-      // Return the error to the caller
-      return Promise.reject(error)
-    }
-  )
   const [token, setToken] = useState(null)
-  const [userId, setUserId] = useState()
+  // const [userId, setUserId] = useState()
   const [previousPath, setPreviousPath] = useState('/')
+  const [user, setUser] = useState()
 
   useEffect(() => {
     const storedToken = Cookies.get('token')
-    const storedUserId = Cookies.get('user_id')
-    if (storedToken && storedUserId) {
+    // console.log('render page')
+    // console.log(storedToken)
+
+    if (storedToken) {
+      const getUser = async () => {
+        await axios
+          .get(`${process.env.NEXT_PUBLIC_API_URL}/v1/customers/1`, {
+            headers: {
+              Authorization: storedToken,
+            },
+          })
+          .then((response) => {
+            setUser(response.data.data.user)
+            return response
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      }
+      getUser()
       setToken(storedToken)
-      setUserId(storedUserId)
     }
   }, [])
 
   const login = async (data) => {
-    const url = `${process.env.NEXT_PUBLIC_BASE_URL}/v1/login`
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/v1/auth/login`
 
     const res = await axios
       .post(url, data)
       .then((response) => {
-        console.log(response)
-        if (response.data.code === 200) {
-          const { authentication_token, userId } = response.data.data
-          setToken(authentication_token)
-          setUserId(userId)
-          Cookies.set('token', authentication_token, {
-            expires: 1,
+        // console.log(response)
+        if (response.data) {
+          const { token } = response.data.data
+          // console.log(token)
+          setToken(token)
+          // setUserId(userId)
+          Cookies.set('token', token, {
+            expires: 3,
           })
-          Cookies.set('user_id', userId, { expires: 1 })
         }
 
         return response
@@ -91,21 +67,15 @@ export function AuthProvider({ children }) {
         console.log(err)
         return err
       })
-
-    return res.data
-    // return res
-    //   // return res
-    // } catch (error) {
-    //   console.log(error)
-    // }
+    // console.log(res)
+    // return res.data
+    return res.response
   }
 
   const logout = () => {
     // console.log('logout')
     setToken(null)
-    setUserId(null)
     Cookies.remove('token')
-    Cookies.remove('user_id')
     router.push('/')
   }
 
@@ -120,10 +90,10 @@ export function AuthProvider({ children }) {
     isAuthenticated,
     token,
     setToken,
-    userId,
-    setUserId,
     previousPath,
     setPreviousPath,
+    user,
+    setUser,
   }
 
   return (
