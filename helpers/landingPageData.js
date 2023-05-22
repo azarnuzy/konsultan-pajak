@@ -51,8 +51,8 @@ export const navbarData = {
       link: '/#our-client',
     },
     {
-      label: 'Contact',
-      link: '#contact',
+      label: 'Consult Now',
+      link: '/consult-now',
     },
   ],
 }

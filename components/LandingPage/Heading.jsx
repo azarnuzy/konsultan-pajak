@@ -23,7 +23,7 @@ function Heading() {
           <p>{data.description}</p>
         </div>
         <Link
-          href={'/jadwal-konsultasi'}
+          href={'/consult-now'}
           className='w-1/2 py-3 text-center bg-transparent mt-8 border-solid border-gray-600 border-2 font-semibold rounded-md'
         >
           {data.button}
