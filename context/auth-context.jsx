@@ -94,7 +94,10 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const storedToken = Cookies.get('token')
-    const whoami = JSON.parse(Cookies.get('whoami'))
+    let whoami = {}
+    if (Cookies.get('whoami')) {
+      whoami = JSON.parse(Cookies.get('whoami'))
+    }
     if (storedToken) {
       const getUser = async () => {
         await axios
@@ -117,7 +120,7 @@ export function AuthProvider({ children }) {
       setToken(storedToken)
     }
 
-    if (whoami) {
+    if (Cookies.get('whoami')) {
       const getUserData = async () => {
         await axios
           .get(

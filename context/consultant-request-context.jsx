@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useAuth } from './auth-context'
+import { useRouter } from 'next/router'
 
 const AdminVerificationContext = createContext({})
 
@@ -10,10 +11,15 @@ function AdminVerificationProvider({ children }) {
   const [searchTerm, setSearchTerm] = useState('')
   const { token } = useAuth()
 
-  const fetchData = async () => {
+  const [taskData, setTaskData] = useState([])
+
+  const router = useRouter()
+  const { pathname } = router
+
+  const fetchData = async (path) => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/schedules`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/${path}`,
         {
           headers: {
             Authorization: token,
@@ -21,7 +27,12 @@ function AdminVerificationProvider({ children }) {
         }
       )
       // console.log(response)
-      setData(response.data)
+      if (path === 'schedules') {
+        console.log(response.data)
+        setData(response.data)
+      } else {
+        setTaskData(response.data)
+      }
     } catch (error) {
       console.log(error)
     }
@@ -47,11 +58,16 @@ function AdminVerificationProvider({ children }) {
 
   // Fetch data from API
 
+  // console.log(pathname)
   useEffect(() => {
     if (token) {
-      fetchData()
+      if (pathname.includes('request')) {
+        fetchData('schedules')
+      } else {
+        fetchData('consultations')
+      }
     }
-  }, [token])
+  }, [pathname, token])
 
   // Handle search term change
   const handleSearchTermChange = (event) => {

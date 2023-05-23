@@ -17,14 +17,15 @@ const Table = () => {
   const [status, setStatus] = useState()
   // const whoami = JSON.parse(Cookies.get('whoami'));
 
+  //   console.log(data)
   const handleAccept = async (id) => {
     setIsLoading(true)
     await axios
       .put(
         `${process.env.NEXT_PUBLIC_API_URL}/api/v1/schedules/${id}/accept`,
         {
-          admin_id: userData.data.admin.id,
-          cost: 1000000,
+          //   admin_id: userData.data.admin.id,
+          //   cost: 1000000,
         },
         {
           headers: {
@@ -94,15 +95,19 @@ const Table = () => {
             >
               <td className='py-2 px-2 md:px-4 border-b'>{index + 1}</td>
               <td className='py-2 px-2 md:px-4 border-b'>
-                {item.customer.name}
+                {/* {item.customer.name} */}
               </td>
-              <td className='py-2 px-2 md:px-4 border-b'>{item.type.type}</td>
               <td className='py-2 px-2 md:px-4 border-b'>
-                {convertDate(item.date)}
+                {/* {item.type.type} */}
               </td>
-              <td className='py-2 px-2 md:px-4 border-b'>{item.place_type}</td>
               <td className='py-2 px-2 md:px-4 border-b'>
-                {item.address || '-'}
+                {/* {convertDate(item.date)} */}
+              </td>
+              <td className='py-2 px-2 md:px-4 border-b'>
+                {/* {item.place_type} */}
+              </td>
+              <td className='py-2 px-2 md:px-4 border-b'>
+                {/* {item.address || '-'} */}
               </td>
               <td className='py-2 px-2 md:px-4 border-b '>
                 <div className='flex items-center justify-center gap-2'>
@@ -116,17 +121,17 @@ const Table = () => {
                         : 'text-white hover:bg-green-700 bg-green-500 '
                     } font-bold py-2 px-2 md:px-4 rounded mr-2`}
                     onClick={() => {
-                      handleAccept(item.id)
+                      //   handleAccept(item.id)
                     }}
-                    disabled={item.status === 'Accepted'}
+                    // disabled={item.status === 'Accepted'}
                   >
-                    {item.status === 'Accepted' ? 'Accepted' : 'Accept'}
+                    {/* {item.status === 'Accepted' ? 'Accepted' : 'Accept'} */}
                     {/* Accept */}
                   </button>
                   <button
                     className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 md:px-4 rounded'
                     onClick={() => {
-                      handleDelete(item.id)
+                      //   handleDelete(item.id)
                     }}
                   >
                     Delete

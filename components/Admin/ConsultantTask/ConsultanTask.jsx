@@ -1,14 +1,11 @@
-// import Pagination from '@/components/Admin/ConsultantRequest/Pagination/Pagination'
-// import SearchBar from '@/components/Admin/ConsultantRequest/SearchBar/Search'
-// import Table from '@/components/Admin/ConsultantRequest/Table/Table'
 import AdminVerificationProvider from '@/context/consultant-request-context'
 import AdminLayout from '@/layouts/adminLayout'
 import React from 'react'
-import SearchBar from './SearchBar/Search'
+import SearchBar from './SearchBar/SearchBar'
 import Table from './Table/Table'
 import Pagination from './Pagination/Pagination'
 
-function ConsultantRequest() {
+function ConsultanTask() {
   return (
     <AdminLayout>
       <AdminVerificationProvider>
@@ -24,4 +21,4 @@ function ConsultantRequest() {
   )
 }
 
-export default ConsultantRequest
+export default ConsultanTask

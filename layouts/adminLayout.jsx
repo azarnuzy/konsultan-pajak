@@ -26,11 +26,11 @@ const AdminLayout = ({ children }) => {
     },
     {
       name: 'Consult Task',
-      link: '/admin/consult-task',
+      link: '/admin/consultant-task',
     },
     {
       name: 'Consult History',
-      link: '/admin/consult-history',
+      link: '/admin/consultant-history',
     },
   ]
 
