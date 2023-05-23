@@ -34,7 +34,7 @@
 }
 
 .container-table {
-  @apply overflow-x-scroll  scrollbar-thumb-lighBlue scrollbar-thin scrollbar-track-slate-200 lg:scrollbar-track-transparent scrollbar-thumb-rounded;
+  @apply overflow-scroll  scrollbar-thumb-lighBlue scrollbar-thin scrollbar-track-slate-200 lg:scrollbar-track-transparent scrollbar-thumb-rounded;
 }
 
 .admin-title {

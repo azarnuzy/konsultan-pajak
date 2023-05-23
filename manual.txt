@@ -1,0 +1,54 @@
+FITUR CLIENT
+1. Landing page: GET/Get profile
+2. Register: POST/Register
+3. Login: POST/Login
+4. Profile User:
+- GET/Get One User
+- GET/Get One Customer
+- GET/Get Customer Consultations (status=requested, status=ongoing, status=done)
+5. Edit Profile User:
+- GET/Who Am I
+- GET/Get One User
+- GET/Get One Customer
+- PUT/Update Image
+- PUT/Update Customer
+6. Jadwal Konsultasi:
+- GET/Get All Consult Types
+- POST/Create Schedules
+
+FITUR ADMIN
+1. Dashboard: GET/Summary Dashboard
+2. Daftar Klien: GET/Get All Customers
+3. Tambah Klien:
+- POST/Create User
+- POST/Create Customer 
+- POST/Create Image
+4. Edit Klien:
+- PUT/Update Customer
+- PUT/Update Image
+5. Hapus Klien:
+- DELETE/Delete Image
+- DELETE/Delete Customer
+- DELETE/Delete User
+6. Detail Data Klien:
+- GET/Get One User
+- GET/Get One Customer
+- GET/Get Customer Consultation 
+7. Daftar Permintaan Konsultasi: GET/Get All Schedules
+8. Verifikasi Jadwal Konsultasi:
+- PUT/Accept Schedule
+Atau - PUT/Decline Schedule
+9. Daftar Konsultasi: GET/Get All Consultation 
+10. Detail Konsultasi: GET/Get One Consultation 
+11. Mulai Konsultasi: PUT/Start Consultation 
+12. Akhiri Konsultasi: PUT/End Consultation 
+13. Kirim Doc Hasil: POST/Create Document
+
+?sort=<nama_field>&type=<ASC/DESC>
+?page=<1,2,3, dst>
+?search=<keyword>
+
+Misal:
+- https://kppbudiindratno-prod.up.railway.app/api/v1/users?sort=name&type=DESC
+- https://kppbudiindratno-prod.up.railway.app/api/v1/users?page=1
+- https://kppbudiindratno-prod.up.railway.app/api/v1/users?search=sekar 

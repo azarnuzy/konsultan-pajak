@@ -10,7 +10,7 @@ function ConsultantRequest() {
     <AdminLayout>
       <AdminVerificationProvider>
         {' '}
-        <div className='container mx-auto'>
+        <div className='max-h-[calc(100vh-70px)] mx-auto'>
           <h1 className='admin-title'>Consultant Request</h1>
           <SearchBar />
           <Table />
