@@ -14,8 +14,12 @@ export function AuthProvider({ children }) {
 
   const [token, setToken] = useState(null)
   const [previousPath, setPreviousPath] = useState('/')
+  // customer data
   const [user, setUser] = useState()
-  const [userInfo, setWhoAmI] = useState()
+  // const [whoAmI, setWhoAmI] = useState()
+
+  // user data
+  const [userData, setUserData] = useState()
 
   const [showUpload, setShowUpload] = useState(false)
   const [profileImage, setProfileImage] = useState()
@@ -55,7 +59,7 @@ export function AuthProvider({ children }) {
       })
   }
 
-  const whoAmI = async () => {
+  const getWhoAmI = async () => {
     // console.log(token)
     await axios
       .get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/whoami`, {
@@ -65,7 +69,7 @@ export function AuthProvider({ children }) {
       })
       .then((response) => {
         // console.log(response, !pathname.startsWith('/admin/'))
-
+        // console.log(response)
         // console.log(response, pathname)
         if (!router.pathname.startsWith('/admin/')) {
           // console.log(response.data.role_id)
@@ -77,9 +81,11 @@ export function AuthProvider({ children }) {
             // localStorage.set('isFirstRender', true);
             // setIsRenderFirst(true)
           }
-
-          setWhoAmI(response.data)
         }
+        // setWhoAmI(response.data)
+        Cookies.set('whoami', JSON.stringify(response.data), {
+          expires: 3,
+        })
       })
       .catch((error) => {
         // console.log(error)
@@ -88,8 +94,8 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const storedToken = Cookies.get('token')
+    const whoami = JSON.parse(Cookies.get('whoami'))
     if (storedToken) {
-      whoAmI()
       const getUser = async () => {
         await axios
           .get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/customers/1`, {
@@ -106,8 +112,31 @@ export function AuthProvider({ children }) {
             console.log(error)
           })
       }
+
       getUser()
       setToken(storedToken)
+    }
+
+    if (whoami) {
+      const getUserData = async () => {
+        await axios
+          .get(
+            `${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/${whoami.data.id}`,
+            {
+              headers: {
+                Authorization: token,
+              },
+            }
+          )
+          .then((response) => {
+            setUserData(response.data)
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      }
+
+      getUserData()
     }
   }, [token])
 
@@ -142,6 +171,7 @@ export function AuthProvider({ children }) {
             Cookies.set('token', token, {
               expires: 3,
             })
+            getWhoAmI()
           }
           // console.log(response)
           return response
@@ -167,7 +197,9 @@ export function AuthProvider({ children }) {
     setConsultRequest()
     setConsultOngoing()
     setConsultDone()
+    // setWhoAmI()
     Cookies.remove('token')
+    Cookies.remove('whoami')
     router.push('/')
   }
 
@@ -208,9 +240,7 @@ export function AuthProvider({ children }) {
     setConsultOngoing,
     consultDone,
     setConsultDone,
-    userInfo,
-    setWhoAmI,
-    whoAmI,
+    userData,
   }
 
   return (

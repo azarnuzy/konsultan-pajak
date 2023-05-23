@@ -1,11 +1,79 @@
+import LoadingSpinner from '@/components/Loading/LoadingSpinner'
+import Notification from '@/components/Loading/Notification'
+import { useAuth } from '@/context/auth-context'
 import { useAdminVerificationContext } from '@/context/consultant-request-context'
 import { convertDate } from '@/helpers/generalFunction'
+import axios from 'axios'
+import Cookies from 'js-cookie'
+import { useState } from 'react'
 
 const Table = () => {
-  const { data } = useAdminVerificationContext()
-  // console.log(data)
+  const { data, setData, fetchData, getPaginationSchedules } =
+    useAdminVerificationContext()
+  const { token, userData, handleNotification } = useAuth()
+  // console.log(userData)
+  const [isLoading, setIsLoading] = useState(false)
+  const [message, setMessage] = useState()
+  const [status, setStatus] = useState()
+  // const whoami = JSON.parse(Cookies.get('whoami'));
+
+  const handleAccept = async (id) => {
+    setIsLoading(true)
+    await axios
+      .put(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/schedules/${id}/accept`,
+        {
+          admin_id: userData.data.admin.id,
+          cost: 1000000,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      )
+      .then((response) => {
+        setStatus(response.status)
+        setMessage(response.data.message)
+        handleNotification()
+        getPaginationSchedules(data?.pagination?.currentPage, 10)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    setIsLoading(false)
+  }
+  const handleDelete = async (id) => {
+    setIsLoading(true)
+    await axios
+      .delete(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/schedules/${id}`, {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        setStatus(response.status)
+        setMessage(response.data.message)
+        handleNotification()
+        getPaginationSchedules(data?.pagination?.currentPage, 10)
+        // setData(updatedData)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    setIsLoading(false)
+  }
+
   return (
     <div className='max-h-[calc(80vh-70px)] overflow-auto container-table'>
+      <Notification
+        message={message}
+        status={status}
+      />
+      <LoadingSpinner
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
+      />
       <table className=' bg-white border  border-gray-200  '>
         <thead>
           <tr>
@@ -36,16 +104,34 @@ const Table = () => {
               <td className='py-2 px-2 md:px-4 border-b'>
                 {item.address || '-'}
               </td>
-              <td className='py-2 px-2 md:px-4 border-b flex gap-2'>
-                <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 md:px-4 rounded mr-2'>
+              <td className='py-2 px-2 md:px-4 border-b '>
+                <div className='flex items-center justify-center gap-2'>
+                  {/* <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 md:px-4 rounded mr-2'>
                   Update
-                </button>
-                <button className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 md:px-4 rounded mr-2'>
-                  Accept
-                </button>
-                <button className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 md:px-4 rounded'>
-                  Delete
-                </button>
+                </button> */}
+                  <button
+                    className={` ${
+                      item.status === 'Accepted'
+                        ? 'text-slate-200 bg-green-300'
+                        : 'text-white hover:bg-green-700 bg-green-500 '
+                    } font-bold py-2 px-2 md:px-4 rounded mr-2`}
+                    onClick={() => {
+                      handleAccept(item.id)
+                    }}
+                    disabled={item.status === 'Accepted'}
+                  >
+                    {item.status === 'Accepted' ? 'Accepted' : 'Accept'}
+                    {/* Accept */}
+                  </button>
+                  <button
+                    className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 md:px-4 rounded'
+                    onClick={() => {
+                      handleDelete(item.id)
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
               </td>
             </tr>
           ))}

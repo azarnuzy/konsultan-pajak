@@ -1,7 +1,13 @@
 import { useAdminVerificationContext } from '@/context/consultant-request-context'
+import { useState } from 'react'
 
 const SearchBar = () => {
-  const { searchTerm, handleSearchTermChange } = useAdminVerificationContext()
+  // const { searchTerm, handleSearchTermChange } = useAdminVerificationContext()
+  const [searchTerm, setSearchTerm] = useState('')
+  const handleSearchTermChange = (event) => {
+    setSearchTerm(event.target.value)
+    // setCurrentPage(1) // Reset current page when search term changes
+  }
   return (
     <div className='my-4'>
       <input
