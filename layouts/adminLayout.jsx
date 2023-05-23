@@ -18,7 +18,7 @@ const AdminLayout = ({ children }) => {
   const data = [
     {
       name: 'Users',
-      link: '/admin/users',
+      link: '',
     },
     {
       name: 'Consultant Request',
@@ -27,10 +27,6 @@ const AdminLayout = ({ children }) => {
     {
       name: 'Consult Task',
       link: '/admin/consultant-task',
-    },
-    {
-      name: 'Consult History',
-      link: '/admin/consultant-history',
     },
   ]
 
@@ -82,9 +78,9 @@ const AdminLayout = ({ children }) => {
             )
           })}
           <div className=' border-solid border-b-[1px] border-white'></div>
-          <li className=''>
+          <li className='cursor-pointer'>
             <Link
-              href={'admin/chat'}
+              href={''}
               className='flex gap-2 items-center'
             >
               <HiChat />

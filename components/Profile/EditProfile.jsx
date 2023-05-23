@@ -48,7 +48,7 @@ function EditProfile() {
   }, [user])
 
   const onSubmit = async (data) => {
-    console.log(data)
+    // console.log(data)
     setIsLoading(true)
     const formData = {
       name: data.name,
@@ -73,12 +73,13 @@ function EditProfile() {
         }
       )
       .then((response) => {
+        // console.log(response)
         setStatus(response.status)
         setMessage(response.data.message)
         handleNotification()
       })
       .catch((error) => {
-        // console.log(error.response)
+        // console.log(error)
         setStatus(error.response.status)
         setMessage(error.response.data.message)
         handleNotification()

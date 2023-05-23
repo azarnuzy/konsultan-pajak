@@ -6,7 +6,7 @@ const Notification = ({ message, status }) => {
   //   const [open, setOpen] = React.useState(false);
   //   const eventDateRef = React.useRef(new Date());
   //   const timerRef = React.useRef(0);
-
+  // console.log(message, status)
   const { open, setOpen, eventDateRef, timerRef } = useAuth()
 
   React.useEffect(() => {
