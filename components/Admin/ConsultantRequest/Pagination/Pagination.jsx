@@ -2,8 +2,7 @@ import { useAdminVerificationContext } from '@/context/consultant-request-contex
 import { useState } from 'react'
 
 const Pagination = ({ onPageChange }) => {
-  const { data, getPaginationSchedules, setData } =
-    useAdminVerificationContext()
+  const { data, getPaginationData, setData } = useAdminVerificationContext()
 
   const [inputPage, setInputPage] = useState(data?.pagination?.currentPage || 1)
 
@@ -16,7 +15,7 @@ const Pagination = ({ onPageChange }) => {
         currentPage: page,
       },
     })
-    getPaginationSchedules(page, 10)
+    getPaginationData(page, 10, 'schedules')
   }
 
   const handleInputChange = (e) => {
@@ -28,7 +27,7 @@ const Pagination = ({ onPageChange }) => {
         currentPage: e.target.value,
       },
     })
-    getPaginationSchedules(e.target.value, 10)
+    getPaginationData(e.target.value, 10, 'schedules')
   }
 
   const handleInputBlur = () => {

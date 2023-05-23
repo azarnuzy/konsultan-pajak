@@ -1,4 +1,7 @@
 export const convertDate = (inputDate) => {
+  if (inputDate === null) {
+    return null
+  }
   const date = new Date(inputDate)
 
   const day = date.getDate().toString().padStart(2, '0')
@@ -10,4 +13,14 @@ export const convertDate = (inputDate) => {
 
   const formattedDate = `${day} ${month} ${year}  |  ${hours}:${minutes} ${amPm}`
   return formattedDate
+}
+
+export function convertToRupiah(value) {
+  const formatter = new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    minimumFractionDigits: 0,
+  })
+
+  return formatter.format(value)
 }

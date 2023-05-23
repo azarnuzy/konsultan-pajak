@@ -28,7 +28,7 @@ function AdminVerificationProvider({ children }) {
       )
       // console.log(response)
       if (path === 'schedules') {
-        console.log(response.data)
+        // console.log(response.data)
         setData(response.data)
       } else {
         setTaskData(response.data)
@@ -37,11 +37,11 @@ function AdminVerificationProvider({ children }) {
       console.log(error)
     }
   }
-  const getPaginationSchedules = async (page, limit) => {
+  const getPaginationData = async (page, limit, path) => {
     // console.log(page, limit)
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/schedules?page=${page}&limit=${limit}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/${path}?page=${page}&limit=${limit}`,
         {
           headers: {
             Authorization: token,
@@ -49,7 +49,11 @@ function AdminVerificationProvider({ children }) {
         }
       )
       // console.log(response)
-      setData(response.data)
+      if (path === 'schedules') {
+        setData(response.data)
+      } else if (path === 'consultations') {
+        setTaskData(response.data)
+      }
     } catch (error) {
       console.log(error)
     }
@@ -82,9 +86,11 @@ function AdminVerificationProvider({ children }) {
         setData,
         searchTerm,
         setSearchTerm,
-        getPaginationSchedules,
+        getPaginationData,
         handleSearchTermChange,
         fetchData,
+        taskData,
+        setTaskData,
       }}
     >
       {children}

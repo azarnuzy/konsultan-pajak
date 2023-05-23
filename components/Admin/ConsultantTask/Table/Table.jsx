@@ -2,15 +2,14 @@ import LoadingSpinner from '@/components/Loading/LoadingSpinner'
 import Notification from '@/components/Loading/Notification'
 import { useAuth } from '@/context/auth-context'
 import { useAdminVerificationContext } from '@/context/consultant-request-context'
-import { convertDate } from '@/helpers/generalFunction'
+import { convertDate, convertToRupiah } from '@/helpers/generalFunction'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { useState } from 'react'
 
 const Table = () => {
-  const { data, setData, fetchData, getPaginationSchedules } =
-    useAdminVerificationContext()
-  const { token, userData, handleNotification } = useAuth()
+  const { taskData, getPaginationData } = useAdminVerificationContext()
+  const { token, handleNotification } = useAuth()
   // console.log(userData)
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState()
@@ -22,7 +21,7 @@ const Table = () => {
     setIsLoading(true)
     await axios
       .put(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/schedules/${id}/accept`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/consultations/${id}/start`,
         {
           //   admin_id: userData.data.admin.id,
           //   cost: 1000000,
@@ -34,10 +33,15 @@ const Table = () => {
         }
       )
       .then((response) => {
+        // console.log(response)
         setStatus(response.status)
         setMessage(response.data.message)
         handleNotification()
-        getPaginationSchedules(data?.pagination?.currentPage, 10)
+        getPaginationData(
+          taskData?.pagination?.currentPage,
+          10,
+          'consultations'
+        )
       })
       .catch((error) => {
         console.log(error)
@@ -47,16 +51,19 @@ const Table = () => {
   const handleDelete = async (id) => {
     setIsLoading(true)
     await axios
-      .delete(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/schedules/${id}`, {
-        headers: {
-          Authorization: token,
-        },
-      })
+      .put(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/consultations/${id}/end`,
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      )
       .then((response) => {
         setStatus(response.status)
         setMessage(response.data.message)
         handleNotification()
-        getPaginationSchedules(data?.pagination?.currentPage, 10)
+        getPaginationData(data?.pagination?.currentPage, 10, 'consultations')
         // setData(updatedData)
       })
       .catch((error) => {
@@ -80,34 +87,32 @@ const Table = () => {
           <tr>
             <th className=' py-2 px-2 md:px-4 border-b'>No.</th>
             <th className=' py-2 px-2 md:px-4 border-b'>Nama WP</th>
-            <th className=' py-2 px-2 md:px-4 border-b'>Jasa Konsultasi</th>
-            <th className=' py-2 px-2 md:px-4 border-b'>Tanggal/Waktu</th>
-            <th className=' py-2 px-2 md:px-4 border-b'>Tempat Konsultasi</th>
-            <th className=' py-2 px-2 md:px-4 border-b'>Alamat Konsultasi</th>
+            <th className=' py-2 px-2 md:px-4 border-b'>Tanggal Mulai</th>
+            <th className=' py-2 px-2 md:px-4 border-b'>Tanggal Selesai</th>
+            <th className=' py-2 px-2 md:px-4 border-b'>Status</th>
+            <th className=' py-2 px-2 md:px-4 border-b'>Cost</th>
             <th className=' py-2 px-2 md:px-4 border-b'>Actions</th>
           </tr>
         </thead>
         <tbody className=''>
-          {data?.data?.map((item, index) => (
+          {taskData?.data?.map((item, index) => (
             <tr
               key={index}
               className={index % 2 === 0 ? 'bg-gray-50' : ''}
             >
               <td className='py-2 px-2 md:px-4 border-b'>{index + 1}</td>
               <td className='py-2 px-2 md:px-4 border-b'>
-                {/* {item.customer.name} */}
+                {item.schedule.customer.name}
               </td>
               <td className='py-2 px-2 md:px-4 border-b'>
-                {/* {item.type.type} */}
+                {convertDate(item?.date_start) || '-'}
               </td>
               <td className='py-2 px-2 md:px-4 border-b'>
-                {/* {convertDate(item.date)} */}
+                {convertDate(item?.date_end) || '-'}
               </td>
+              <td className='py-2 px-2 md:px-4 border-b'>{item.status}</td>
               <td className='py-2 px-2 md:px-4 border-b'>
-                {/* {item.place_type} */}
-              </td>
-              <td className='py-2 px-2 md:px-4 border-b'>
-                {/* {item.address || '-'} */}
+                {convertToRupiah(item.cost) || '-'}
               </td>
               <td className='py-2 px-2 md:px-4 border-b '>
                 <div className='flex items-center justify-center gap-2'>
@@ -116,25 +121,30 @@ const Table = () => {
                 </button> */}
                   <button
                     className={` ${
-                      item.status === 'Accepted'
+                      item.status !== 'Not Started'
                         ? 'text-slate-200 bg-green-300'
                         : 'text-white hover:bg-green-700 bg-green-500 '
                     } font-bold py-2 px-2 md:px-4 rounded mr-2`}
                     onClick={() => {
-                      //   handleAccept(item.id)
+                      handleAccept(item.id)
                     }}
-                    // disabled={item.status === 'Accepted'}
+                    disabled={item.status === 'Ongoing'}
                   >
-                    {/* {item.status === 'Accepted' ? 'Accepted' : 'Accept'} */}
+                    {item.status !== 'Not Started' ? 'Ongoing' : 'Start'}
                     {/* Accept */}
                   </button>
                   <button
-                    className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 md:px-4 rounded'
+                    className={`font-bold py-2 px-2 md:px-4 rounded ${
+                      item.status !== 'Ongoing'
+                        ? 'bg-red-400 text-slate-200'
+                        : 'bg-red-500 hover:bg-red-700 text-white '
+                    }`}
+                    disabled={item.status !== 'Ongoing'}
                     onClick={() => {
-                      //   handleDelete(item.id)
+                      handleDelete(item.id)
                     }}
                   >
-                    Delete
+                    Stop
                   </button>
                 </div>
               </td>

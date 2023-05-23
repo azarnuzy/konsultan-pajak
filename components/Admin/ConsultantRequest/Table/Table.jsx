@@ -8,7 +8,7 @@ import Cookies from 'js-cookie'
 import { useEffect, useState } from 'react'
 
 const Table = () => {
-  const { data, setData, fetchData, getPaginationSchedules } =
+  const { data, setData, fetchData, getPaginationData } =
     useAdminVerificationContext()
   const { token, userData, handleNotification } = useAuth()
   // console.log(userData)
@@ -40,7 +40,7 @@ const Table = () => {
         setStatus(response.status)
         setMessage(response.data.message)
         handleNotification()
-        getPaginationSchedules(data?.pagination?.currentPage, 10)
+        getPaginationData(data?.pagination?.currentPage, 10, 'schedules')
       })
       .catch((error) => {
         console.log(error)
@@ -59,7 +59,7 @@ const Table = () => {
         setStatus(response.status)
         setMessage(response.data.message)
         handleNotification()
-        getPaginationSchedules(data?.pagination?.currentPage, 10)
+        getPaginationData(data?.pagination?.currentPage, 10, 'schedules')
         // setData(updatedData)
       })
       .catch((error) => {

@@ -2,48 +2,50 @@ import { useAdminVerificationContext } from '@/context/consultant-request-contex
 import { useState } from 'react'
 
 const Pagination = ({ onPageChange }) => {
-  const { data, getPaginationSchedules, setData } =
+  const { taskData, getPaginationSchedules, setTaskData } =
     useAdminVerificationContext()
 
-  const [inputPage, setInputPage] = useState(data?.pagination?.currentPage || 1)
+  const [inputPage, setInputPage] = useState(
+    taskData?.pagination?.currentPage || 1
+  )
 
   const handlePageChange = (page) => {
     setInputPage(page)
-    setData({
+    setTaskData({
       ...data,
       pagination: {
         ...data.pagination,
         currentPage: page,
       },
     })
-    getPaginationSchedules(page, 10)
+    getPaginationSchedules(page, 10, 'consultations')
   }
 
   const handleInputChange = (e) => {
     setInputPage(e.target.value)
-    setData({
+    setTaskData({
       ...data,
       pagination: {
         ...data.pagination,
         currentPage: e.target.value,
       },
     })
-    getPaginationSchedules(e.target.value, 10)
+    getPaginationSchedules(e.target.value, 10, 'consultations')
   }
 
   const handleInputBlur = () => {
     if (inputPage < 1) {
       setInputPage(1)
-    } else if (inputPage > data?.pagination?.totalPages) {
-      setInputPage(data?.pagination?.totalPages)
+    } else if (inputPage > taskData?.pagination?.totalPages) {
+      setInputPage(taskData?.pagination?.totalPages)
     }
   }
 
   return (
     <div className='flex items-center justify-center mt-4'>
       <button
-        onClick={() => handlePageChange(data?.pagination?.prev)}
-        disabled={data?.pagination?.currentPage === 1}
+        onClick={() => handlePageChange(taskData?.pagination?.prev)}
+        disabled={taskData?.pagination?.currentPage === 1}
         className='px-2 py-1 mr-2 text-sm font-medium text-gray-500 bg-white rounded hover:bg-gray-100'
       >
         Prev
@@ -52,18 +54,18 @@ const Pagination = ({ onPageChange }) => {
         type='number'
         value={inputPage}
         min={1}
-        max={data?.pagination?.totalPages}
+        max={taskData?.pagination?.totalPages}
         onChange={handleInputChange}
         onBlur={handleInputBlur}
         className='w-12 px-2 py-1 mr-2 text-sm text-center text-gray-700 bg-white border border-gray-300 rounded'
       />
       <span className='text-sm text-gray-600'>
-        / {data?.pagination?.totalPages} pages
+        / {taskData?.pagination?.totalPages} pages
       </span>
       <button
-        onClick={() => handlePageChange(data?.pagination?.next)}
+        onClick={() => handlePageChange(taskData?.pagination?.next)}
         disabled={
-          data?.pagination?.currentPage === data?.pagination?.totalPages
+          taskData?.pagination?.currentPage === taskData?.pagination?.totalPages
         }
         className='px-2 py-1 ml-2 text-sm font-medium text-gray-500 bg-white rounded hover:bg-gray-100'
       >
