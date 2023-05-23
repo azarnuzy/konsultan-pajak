@@ -21,7 +21,7 @@ const Table = () => {
         </tr>
       </thead>
       <tbody>
-        {currentData.map((item, index) => (
+        {/* {currentData.map((item, index) => (
           <tr
             key={index}
             className={index % 2 === 0 ? 'bg-gray-50' : ''}
@@ -51,7 +51,7 @@ const Table = () => {
               </button>
             </td>
           </tr>
-        ))}
+        ))} */}
       </tbody>
     </table>
   )

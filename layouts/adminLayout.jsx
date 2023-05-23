@@ -3,10 +3,13 @@ import Link from 'next/link'
 import { AiFillDashboard } from 'react-icons/ai'
 import { FaUserCircle, FaUsers } from 'react-icons/fa'
 import { MdPendingActions, MdTask } from 'react-icons/md'
-import { HiBell, HiChat, HiMail, HiStop } from 'react-icons/hi'
+import { HiBell, HiChat, HiLogout, HiMail, HiStop } from 'react-icons/hi'
+import { useAuth } from '@/context/auth-context'
 
 const AdminLayout = ({ children }) => {
   const [isMounted, setIsMounted] = useState(false)
+
+  const { logout } = useAuth()
 
   useEffect(() => {
     setIsMounted(true)
@@ -87,6 +90,19 @@ const AdminLayout = ({ children }) => {
               <HiChat />
               <span className='text-white'>Live Chat</span>
             </Link>
+          </li>
+          <div className=' border-solid border-b-[1px] border-white'></div>
+          <li
+            className='cursor-pointer'
+            onClick={logout}
+          >
+            <div
+              // href={'admin/chat'}
+              className='flex gap-2 items-center'
+            >
+              <HiLogout />
+              <span className='text-white'>Logout</span>
+            </div>
           </li>
         </ul>
       </div>

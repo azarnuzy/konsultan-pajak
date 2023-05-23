@@ -52,6 +52,7 @@ function Login() {
   // }, [errors])
 
   const onSubmit = async (data) => {
+    console.log(data)
     setIsLoading(true)
     const response = await login(data)
     // console.log(response)

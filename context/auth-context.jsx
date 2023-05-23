@@ -15,10 +15,12 @@ export function AuthProvider({ children }) {
   const [token, setToken] = useState(null)
   const [previousPath, setPreviousPath] = useState('/')
   const [user, setUser] = useState()
-  const [userInfo, setUserInfo] = useState()
+  const [userInfo, setWhoAmI] = useState()
 
   const [showUpload, setShowUpload] = useState(false)
   const [profileImage, setProfileImage] = useState()
+
+  // const [isRenderFirst, setIsRenderFirst] = useState(false)
 
   const [consultRequest, setConsultRequest] = useState()
   const [consultOngoing, setConsultOngoing] = useState()
@@ -53,22 +55,31 @@ export function AuthProvider({ children }) {
       })
   }
 
-  const getUserInfo = async () => {
+  const whoAmI = async () => {
+    // console.log(token)
     await axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/${user.id}`, {
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/whoami`, {
         headers: {
-          Authorization: token,
+          Authorization: Cookies.get('token'),
         },
       })
       .then((response) => {
-        // console.log(response)
-        if (
-          response.data.data.role_id === 1 ||
-          response.data.data.role_id === 2
-        ) {
-          router.push('/admin')
+        // console.log(response, !pathname.startsWith('/admin/'))
+
+        // console.log(response, pathname)
+        if (!router.pathname.startsWith('/admin/')) {
+          // console.log(response.data.role_id)
+          if (
+            response.data.data.role_id === 1 ||
+            response.data.data.role_id === 2
+          ) {
+            router.push('/admin')
+            // localStorage.set('isFirstRender', true);
+            // setIsRenderFirst(true)
+          }
+
+          setWhoAmI(response.data)
         }
-        setUserInfo(response.data)
       })
       .catch((error) => {
         // console.log(error)
@@ -78,6 +89,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const storedToken = Cookies.get('token')
     if (storedToken) {
+      whoAmI()
       const getUser = async () => {
         await axios
           .get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/customers/1`, {
@@ -86,7 +98,7 @@ export function AuthProvider({ children }) {
             },
           })
           .then((response) => {
-            console.log(response)
+            // console.log(response)
             setUser(response.data.data)
             return response
           })
@@ -102,7 +114,6 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     if (user) {
       // console.log(user._links)
-      getUserInfo()
       getConsultCustomer(
         user?._links?.['consult-request']?.href,
         setConsultRequest
@@ -116,29 +127,35 @@ export function AuthProvider({ children }) {
   }, [user])
 
   const login = async (data) => {
-    const url = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/login`
+    try {
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/login`
 
-    const res = await axios
-      .post(url, data)
-      .then((response) => {
-        // console.log(response)
-        if (response.data) {
-          const { token } = response.data.data
-          // console.log(token)
-          setToken(token)
-          // setUserId(userId)
-          Cookies.set('token', token, {
-            expires: 3,
-          })
-        }
-
-        return response
-      })
-      .catch((err) => {
-        console.log(err)
-        return err
-      })
-    return res.response
+      const res = await axios
+        .post(url, data)
+        .then((response) => {
+          // console.log(response)
+          if (response.data) {
+            const { token } = response.data.data
+            // console.log(token)
+            setToken(token)
+            // setUserId(userId)
+            Cookies.set('token', token, {
+              expires: 3,
+            })
+          }
+          // console.log(response)
+          return response
+          // return response
+        })
+        .catch((err) => {
+          console.log(err)
+          // return err
+        })
+      // console.log(res)
+      // return res
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const logout = () => {
@@ -192,7 +209,8 @@ export function AuthProvider({ children }) {
     consultDone,
     setConsultDone,
     userInfo,
-    setUserInfo,
+    setWhoAmI,
+    whoAmI,
   }
 
   return (

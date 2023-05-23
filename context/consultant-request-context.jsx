@@ -1,5 +1,7 @@
+import axios from 'axios'
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useAuth } from './auth-context'
 
 const AdminVerificationContext = createContext({})
 
@@ -9,26 +11,38 @@ function AdminVerificationProvider({ children }) {
   const [currentPage, setCurrentPage] = useState(1)
   const [perPage] = useState(10)
 
+  const { token } = useAuth()
+
   // Fetch data from API
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('your-api-endpoint')
-        setData(response.data)
-      } catch (error) {
-        console.log(error)
+    if (token) {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(
+            `${process.env.NEXT_PUBLIC_API_URL}/api/v1/schedules`,
+            {
+              headers: {
+                Authorization: token,
+              },
+            }
+          )
+          // console.log(response)
+          setData(response.data.data)
+        } catch (error) {
+          console.log(error)
+        }
       }
+      fetchData()
     }
-
-    fetchData()
-  }, [])
+  }, [token])
 
   // Filter data based on search term
   const filteredData = data.filter((item) => {
-    return (
-      item.namaWP.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.jasaKonsultasi.toLowerCase().includes(searchTerm.toLowerCase())
-    )
+    return []
+    // return (
+    //   item.namaWP.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    //   item.jasaKonsultasi.toLowerCase().includes(searchTerm.toLowerCase())
+    // )
   })
 
   // Get current page of data

@@ -24,6 +24,7 @@ function UploadImage() {
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
+    console.log(user)
     if (profileImage) {
       setSrc(URL.createObjectURL(profileImage))
     }
@@ -31,6 +32,41 @@ function UploadImage() {
 
   const [message, setMessage] = useState()
   const [status, setStatus] = useState()
+
+  const postImage = async (data) => {
+    setIsLoading(true)
+    const formData = new FormData()
+    if (data) {
+      formData.append('image', data)
+    }
+    await axios
+      .post(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/images/`, formData, {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        const { data } = response.data
+        setUser({
+          ...user,
+          user: {
+            ...user.user,
+            image: {
+              ...user.user.image,
+              file_name: data.file_name,
+              imagekit_url: data.imagekit_url,
+            },
+          },
+        })
+        // console.log(user)
+        // console.log(response)
+        setStatus(response.status)
+        setMessage(response.data.message)
+        handleNotification()
+      })
+
+    setIsLoading(false)
+  }
 
   const uploadImage = async (data) => {
     setIsLoading(true)
@@ -40,7 +76,7 @@ function UploadImage() {
     }
     await axios
       .put(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/images/${user?.user?.img_id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/images/${user?.user_id}`,
         formData,
         {
           headers: {
@@ -70,6 +106,9 @@ function UploadImage() {
       .catch((error) => {
         // setStatus(error.response.status)
         // setMessage(error.response.data.message)
+        // handleNotification()
+        // console.log(data)
+        postImage(data)
         console.log(error)
       })
 

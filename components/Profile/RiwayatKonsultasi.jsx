@@ -19,12 +19,13 @@ export default function RiwayatKonsultasi() {
   })
 
   useEffect(() => {
+    console.log(consultRequest)
     setCategories({
       'Menunggu Verifikasi': consultRequest,
       'Sedang Berjalan': consultOngoing,
       Selesai: consultDone,
     })
-    console.log(user)
+    // console.log(user)
     // console.log(consultRequest)
   }, [consultRequest, consultOngoing, consultDone])
 
@@ -143,7 +144,7 @@ export default function RiwayatKonsultasi() {
                       />
                     </li>
                   ))}
-                {!posts && (
+                {posts?.length === 0 && (
                   <div className='flex justify-center'>
                     <div className='w-full h-full sm:w-[450px] sm:h-[560px] object-cover'>
                       <Image
