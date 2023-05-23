@@ -4,6 +4,7 @@ import { FaCalendarTimes, FaSuitcase } from 'react-icons/fa'
 import { HiLocationMarker } from 'react-icons/hi'
 import { useAuth } from '@/context/auth-context'
 import Image from 'next/image'
+import { convertDate } from '@/helpers/generalFunction'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -28,22 +29,6 @@ export default function RiwayatKonsultasi() {
     // console.log(user)
     // console.log(consultRequest)
   }, [consultRequest, consultOngoing, consultDone])
-
-  const convertDate = (inputDate) => {
-    const date = new Date(inputDate)
-
-    const day = date.getDate().toString().padStart(2, '0')
-    const month = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(
-      date
-    )
-    const year = date.getFullYear()
-    const hours = date.getHours() % 12 || 12
-    const minutes = date.getMinutes().toString().padStart(2, '0')
-    const amPm = date.getHours() < 12 ? 'AM' : 'PM'
-
-    const formattedDate = `${day} ${month} ${year}  |  ${hours}:${minutes} ${amPm}`
-    return formattedDate
-  }
 
   return (
     <div className='w-full  px-2 py-16 sm:px-0'>

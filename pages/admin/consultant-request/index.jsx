@@ -1,24 +1,8 @@
-import Pagination from '@/components/Generals/Pagination/Pagination'
-import SearchBar from '@/components/Generals/SearchBar/Search'
-import Table from '@/components/Generals/Table/Table'
-import AdminVerificationProvider from '@/context/consultant-request-context'
-import AdminLayout from '@/layouts/adminLayout'
+import ConsultantRequest from '@/components/Admin/ConsultantRequest/ConsultantRequest'
 import React from 'react'
 
-function VerificationPage() {
-  return (
-    <AdminLayout>
-      <AdminVerificationProvider>
-        {' '}
-        <div className='container mx-auto'>
-          <h1 className='admin-title'>Company Details</h1>
-          <SearchBar />
-          <Table />
-          <Pagination />
-        </div>
-      </AdminVerificationProvider>
-    </AdminLayout>
-  )
+function ConsultantRequestPage() {
+  return <ConsultantRequest />
 }
 
-export default VerificationPage
+export default ConsultantRequestPage

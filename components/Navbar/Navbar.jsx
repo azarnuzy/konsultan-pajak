@@ -58,7 +58,7 @@ function Navbar() {
                     onClick={() => setIsProfileOpen(!isProfileOpen)}
                     className=' py-2 rounded inline-flex items-center'
                   >
-                    <div className='h-12 w-12  cursor-pointer rounded-full '>
+                    <div className='h-12 w-12 object-cover object-center cursor-pointer rounded-full '>
                       <Image
                         src={
                           user?.user?.image?.imagekit_url ||
@@ -67,7 +67,7 @@ function Navbar() {
                         alt='profile user'
                         width={48}
                         height={48}
-                        className='rounded-full'
+                        className='rounded-full h-12 w-12'
                       />
                     </div>
                     {/* <HiUserCircle className='h-12 w-12 bg-white cursor-pointer rounded-full text-darkBlue' /> */}
