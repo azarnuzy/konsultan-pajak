@@ -73,9 +73,9 @@ export default function Register() {
         isLoading={isLoading}
         setIsLoading={setIsLoading}
       />
-      <div className='justify-center sm:justify-normal flex gap-16 h-[calc(100vh-289px)] sm:h-full p-8 items-center m-3'>
-        <div className='justify-center w-1/2 hidden sm:flex'>
-          <div className='sm:w-[400px] object-cover flex items-center justify-center'>
+      <div className='justify-center  md:justify-normal flex sm:gap-8 lg:gap-16 h-full  2xl:h-[calc(100vh-361px)] items-center m-3'>
+        <div className='justify-center sm:w-fit lg:w-1/2 hidden md:flex  md:justify-center'>
+          <div className='sm:w-[350px] object-cover flex items-center justify-center'>
             <Image
               src={'/images/sideImg2.png'}
               alt='Logo Images'

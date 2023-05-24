@@ -178,6 +178,61 @@ function Navbar() {
                   <Link href={item.link}>{item.label}</Link>
                 </li>
               ))}
+
+              {!token ? (
+                <>
+                  <Link
+                    href='/login'
+                    className='inline-block'
+                  >
+                    <li className='bg-white text-center p-2 px-5 rounded text-darkBlue px- text-sm min-[100px]'>
+                      login
+                    </li>
+                  </Link>
+                  <Link
+                    href='/register'
+                    className='inline-block'
+                  >
+                    <li className='bg-white text-center p-2 px-5 rounded text-darkBlue px- text-sm min-[100px]'>
+                      Register
+                    </li>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <li className='flex justify-center items-center my-10'>
+                    <div className='h-32 w-32 object-cover object-center cursor-pointer rounded-full '>
+                      <Image
+                        src={
+                          user?.user?.image?.imagekit_url ||
+                          '/images/profileDefault.png'
+                        }
+                        alt='profile user'
+                        width={48}
+                        height={48}
+                        className='rounded-full h-32 w-32'
+                      />
+                    </div>
+                  </li>
+                  <Link
+                    href='/profile'
+                    className='inline-block'
+                  >
+                    <li className='bg-white text-center p-2 px-5 rounded text-darkBlue px- text-sm min-[100px]'>
+                      Profile
+                    </li>
+                  </Link>
+                  <div
+                    // href='/logout'
+                    onClick={() => logout()}
+                    className='inline-block'
+                  >
+                    <li className='bg-white text-center p-2 px-5 rounded text-darkBlue px- text-sm min-[100px]'>
+                      logout
+                    </li>
+                  </div>
+                </>
+              )}
             </ul>
           </div>
           <div className='flex flex-col gap-3'>
