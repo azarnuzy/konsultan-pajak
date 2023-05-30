@@ -129,12 +129,17 @@ const Table = () => {
                     {/* Accept */}
                   </button>
                   <button
-                    className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 md:px-4 rounded'
+                    className={` font-bold py-2 px-2 md:px-4 rounded   ${
+                      item?.status === 'Accepted'
+                        ? 'text-slate-200 bg-red-300'
+                        : 'bg-red-500 hover:bg-red-700 text-white '
+                    }`}
+                    disabled={item?.status === 'Accepted'}
                     onClick={() => {
                       handleDelete(item?.id)
                     }}
                   >
-                    Delete
+                    Decline
                   </button>
                 </div>
               </td>

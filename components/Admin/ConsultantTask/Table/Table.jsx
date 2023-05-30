@@ -144,7 +144,7 @@ const Table = () => {
                       handleDelete(item.id)
                     }}
                   >
-                    Stop
+                    End
                   </button>
                 </div>
               </td>
