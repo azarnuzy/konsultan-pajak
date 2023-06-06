@@ -118,7 +118,12 @@ function DetailRequest() {
         setMessage(response.data.message)
         handleNotification()
       })
-      .catch((error) => console.log(error))
+      .catch((error) => {
+        setStatus(error.response.status)
+        setMessage(error.message)
+        handleNotification()
+        console.log(error)
+      })
 
     setIsLoading(false)
   }
