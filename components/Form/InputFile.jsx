@@ -2,7 +2,7 @@ import { useFormContext } from '@/context/form-context'
 import React from 'react'
 
 function InputFile(props) {
-  const { kelengkapanData, setKelengkapanData } = useFormContext()
+  // const { kelengkapanData, setKelengkapanData } = useFormContext()
 
   return (
     <>
@@ -18,26 +18,20 @@ function InputFile(props) {
           id={props.id}
           className='absolute text-gray-700  inset-0 w-full h-full opacity-0 cursor-pointer'
           {...props.register(props.id, {
-            required: kelengkapanData[props.id] ? false : true,
+            required: true,
             onChange: (e) => {
-              setKelengkapanData({
-                ...kelengkapanData,
+              props.setKelengkapanData({
+                ...props.kelengkapanData,
                 [props.id]: e.target.files,
               })
               props.handleInputChange(e)
             },
           })}
         />
-        <div
-          className={`flex ${
-            kelengkapanData[props.id] !== undefined
-              ? 'justify-between'
-              : 'justify-end'
-          }  items-center pl-4 w-full`}
-        >
-          {kelengkapanData[props.id] && (
+        <div className={`flex justify-end items-center pl-4 w-full`}>
+          {props.kelengkapanData[props.id] && (
             <span className='text-gray-700 overflow-hidden whitespace-nowrap text-ellipsis'>
-              {kelengkapanData[props.id][0].name}
+              {props?.kelengkapanData[props.id][0]?.name || ''}
             </span>
           )}
 

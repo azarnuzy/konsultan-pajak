@@ -5,7 +5,10 @@ import { useAdminVerificationContext } from '@/context/consultant-request-contex
 import { convertDate, convertToRupiah } from '@/helpers/generalFunction'
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import Link from 'next/link'
 import { useState } from 'react'
+import { FaCross, FaInfoCircle, FaPlay, FaStopCircle } from 'react-icons/fa'
+import { MdClose, MdStart } from 'react-icons/md'
 
 const Table = () => {
   const { taskData, getPaginationData } = useAdminVerificationContext()
@@ -73,7 +76,7 @@ const Table = () => {
   }
 
   return (
-    <div className='max-h-[calc(80vh-70px)] overflow-auto container-table'>
+    <div className='max-h-[calc(80vh-100px)] overflow-auto container-table'>
       <Notification
         message={message}
         status={status}
@@ -119,22 +122,30 @@ const Table = () => {
                   {/* <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 md:px-4 rounded mr-2'>
                   Update
                 </button> */}
+                  <Link
+                    href={`/admin/consultant-task/${item?.id}`}
+                    className='flex gap-2 items-center font-bold py-1 px-2 md:px-2 rounded bg-blue-500 hover:bg-blue-700 text-white'
+                  >
+                    <FaInfoCircle />
+                    Detail
+                  </Link>
                   <button
-                    className={` ${
+                    className={`flex items-center gap-2 ${
                       item.status !== 'Not Started'
                         ? 'text-slate-200 bg-green-300'
                         : 'text-white hover:bg-green-700 bg-green-500 '
-                    } font-bold py-2 px-2 md:px-4 rounded mr-2`}
+                    } font-bold py-1 px-2  rounded mr-2`}
                     onClick={() => {
                       handleAccept(item.id)
                     }}
                     disabled={item.status === 'Ongoing'}
                   >
+                    <FaPlay />
                     {item.status !== 'Not Started' ? 'Ongoing' : 'Start'}
                     {/* Accept */}
                   </button>
                   <button
-                    className={`font-bold py-2 px-2 md:px-4 rounded ${
+                    className={`flex items-center gap-2 font-bold py-1 px-2  rounded ${
                       item.status !== 'Ongoing'
                         ? 'bg-red-400 text-slate-200'
                         : 'bg-red-500 hover:bg-red-700 text-white '
@@ -144,6 +155,7 @@ const Table = () => {
                       handleDelete(item.id)
                     }}
                   >
+                    <FaStopCircle />
                     End
                   </button>
                 </div>

@@ -5,7 +5,9 @@ import { useAdminVerificationContext } from '@/context/consultant-request-contex
 import { convertDate } from '@/helpers/generalFunction'
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { FaCheckCircle, FaInfoCircle, FaTrash } from 'react-icons/fa'
 
 const Table = () => {
   const { data, setData, fetchData, getPaginationData } =
@@ -70,7 +72,7 @@ const Table = () => {
 
   // console.log(data)
   return (
-    <div className='max-h-[calc(80vh-70px)] overflow-auto container-table'>
+    <div className='max-h-[calc(80vh-120px)] overflow-auto container-table'>
       <Notification
         message={message}
         status={status}
@@ -110,26 +112,27 @@ const Table = () => {
                 {item?.address || '-'}
               </td>
               <td className='py-2 px-2 md:px-4 border-b '>
-                <div className='flex items-center justify-center gap-2'>
+                <div className=' flex flex-wrap items-center justify-center gap-2'>
                   {/* <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 md:px-4 rounded mr-2'>
                   Update
                 </button> */}
                   <button
-                    className={` ${
+                    className={`flex gap-2 items-center ${
                       item?.status === 'Accepted'
                         ? 'text-slate-200 bg-green-300'
                         : 'text-white hover:bg-green-700 bg-green-500 '
-                    } font-bold py-2 px-2 md:px-4 rounded mr-2`}
+                    } font-bold py-1 px-2 md:px-2 rounded `}
                     onClick={() => {
                       handleAccept(item?.id)
                     }}
                     disabled={item?.status === 'Accepted'}
                   >
+                    <FaCheckCircle />
                     {item?.status === 'Accepted' ? 'Accepted' : 'Accept'}
                     {/* Accept */}
                   </button>
                   <button
-                    className={` font-bold py-2 px-2 md:px-4 rounded   ${
+                    className={`flex gap-2 items-center font-bold py-1 px-2 md:px-2 rounded   ${
                       item?.status === 'Accepted'
                         ? 'text-slate-200 bg-red-300'
                         : 'bg-red-500 hover:bg-red-700 text-white '
@@ -139,6 +142,7 @@ const Table = () => {
                       handleDelete(item?.id)
                     }}
                   >
+                    <FaTrash />
                     Decline
                   </button>
                 </div>
