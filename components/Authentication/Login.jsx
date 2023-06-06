@@ -182,7 +182,7 @@ function Login() {
                 Login
               </button>
               <p className='text-sm mt-5 text-slate-600'>
-                Doesn't have an account?{' '}
+                Doesn&apos;t have an account?{' '}
                 <Link
                   href='/register'
                   className='text-sm text-red-500'

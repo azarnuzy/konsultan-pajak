@@ -60,7 +60,10 @@ function Admin() {
           }
 
           return (
-            <div className='p-3 bg-white shadow-md rounded-lg relative flex items-center justify-between w-[250px]'>
+            <div
+              className='p-3 bg-white shadow-md rounded-lg relative flex items-center justify-between w-[250px]'
+              key={i}
+            >
               <div
                 className={`absolute w-1 ${item.color} left-0 h-full rounded-l-xl`}
               ></div>
