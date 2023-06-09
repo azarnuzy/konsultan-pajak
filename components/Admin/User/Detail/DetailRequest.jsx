@@ -141,8 +141,9 @@ function DetailRequest() {
         setStatus(response.status)
         setMessage(response.data.message)
         handleNotification()
-        getPaginationData(data?.pagination?.currentPage, 10, 'customers')
+        // getPaginationData(data?.pagination?.currentPage, 10, 'customers')
         // setData(updatedData)
+        router.back()
       })
       .catch((error) => {
         console.log(error)
