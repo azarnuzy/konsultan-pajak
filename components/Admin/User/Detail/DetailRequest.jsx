@@ -237,11 +237,10 @@ function DetailRequest() {
                     >
                       <td className='py-2 px-2 md:px-4 border-b'>{index + 1}</td>
                       <td className='py-2 px-2 md:px-4 border-b'>
-                        tes
+                        {item?.type?.type}
                       </td>
-                      <td className='py-2 px-2 md:px-4 border-b'>tes</td>
                       <td className='py-2 px-2 md:px-4 border-b'>
-                        tes
+                        {convertDate(item?.date)}
                       </td>
                       <td className='py-2 px-2 md:px-4 border-b'>{item?.place_type}</td>
                       <td className='py-2 px-2 md:px-4 border-b'>
