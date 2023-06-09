@@ -155,7 +155,7 @@ const Table = () => {
                     }}
                   >
                     <FaTrash />
-                    Decline
+                    Delete
                   </button>
                 </div>
               </td>

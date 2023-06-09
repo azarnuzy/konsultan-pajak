@@ -17,6 +17,7 @@ import {
   FaEnvelope,
   FaLocationArrow,
   FaSuitcase,
+  FaTrash,
 } from 'react-icons/fa'
 import { HiLocationMarker } from 'react-icons/hi'
 
@@ -127,6 +128,27 @@ function DetailRequest() {
 
     setIsLoading(false)
   }
+
+  const handleDelete = async (id) => {
+    setIsLoading(true)
+    await axios
+      .delete(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/customers/${id}`, {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        setStatus(response.status)
+        setMessage(response.data.message)
+        handleNotification()
+        getPaginationData(data?.pagination?.currentPage, 10, 'customers')
+        // setData(updatedData)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    setIsLoading(false)
+  }
   return (
     <AdminLayout>
       <AdminVerificationProvider>
@@ -140,13 +162,31 @@ function DetailRequest() {
         />
         <div className='max-h-[calc(100vh-100px)] overflow-scroll container-table  mx-auto'>
           <h1 className='admin-title'>User Details</h1>
-          <Link
-            href={'/admin/users'}
-            className='flex gap-2 items-center font-bold py-1 px-2 md:px-2 rounded bg-blue-500 hover:bg-blue-700 text-white w-fit mb-3'
-          >
-            <FaArrowLeft />
-            Back
-          </Link>
+          <div className='flex flex-row justify-between'>
+            <Link
+              href={'/admin/users'}
+              className='flex gap-2 items-center font-bold py-1 px-2 md:px-2 rounded bg-blue-500 hover:bg-blue-700 text-white w-fit mb-3'
+            >
+              <FaArrowLeft />
+              Back
+            </Link>
+            <div className='flex flex-row gap-3 item-stretch'>
+              <Link
+                href={`/admin/users/${userDetailData?.data?.user_id}/edit`}
+                className='flex gap-2 items-center font-bold py-1 px-2 md:px-2 rounded bg-yellow-400 hover:bg-orange-700 text-white w-fit mb-3'
+              >
+                Edit
+              </Link>
+              <button
+                className={`flex gap-2 items-center font-bold py-1 px-2 md:px-2 rounded bg-red-500 hover:bg-red-700 text-white w-fit mb-3`}
+                onClick={() => {
+                  handleDelete(userDetailData?.data?.id)
+                }}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
           <div className='flex gap-3 flex-col md:flex-row'>
             <div className='flex flex-col gap-1 min-w-[450px]'>
               <div className='bg-white shadow-sm rounded-sm p-2'>
