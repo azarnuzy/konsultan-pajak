@@ -12,6 +12,7 @@ function AdminVerificationProvider({ children }) {
   const { token } = useAuth()
 
   const [taskData, setTaskData] = useState([])
+  const [customerData, setCustomerData] = useState([])
 
   const router = useRouter()
   const { pathname } = router
@@ -30,8 +31,10 @@ function AdminVerificationProvider({ children }) {
       if (path === 'schedules') {
         // console.log(response.data)
         setData(response.data)
-      } else {
+      } else if (path === 'consultations') {
         setTaskData(response.data)
+      } else{
+        setCustomerData(response.data)
       }
     } catch (error) {
       console.log(error)
@@ -67,8 +70,10 @@ function AdminVerificationProvider({ children }) {
     if (token) {
       if (pathname.includes('request')) {
         fetchData('schedules')
-      } else {
+      } else if (pathname.includes('task')) {
         fetchData('consultations')
+      } else {
+        fetchData('customers')
       }
     }
   }, [pathname, token])
@@ -91,6 +96,8 @@ function AdminVerificationProvider({ children }) {
         fetchData,
         taskData,
         setTaskData,
+        customerData,
+        setCustomerData
       }}
     >
       {children}
