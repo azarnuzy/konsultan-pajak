@@ -18,7 +18,7 @@ const AdminLayout = ({ children }) => {
   const data = [
     {
       name: 'Users',
-      link: '',
+      link: '/admin/users',
     },
     {
       name: 'Consultant Request',
