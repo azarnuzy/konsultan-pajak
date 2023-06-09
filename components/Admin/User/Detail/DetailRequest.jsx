@@ -26,7 +26,7 @@ function DetailRequest() {
   })
 
   const [userDetailData, setUserDetailData] = useState()
-  const [customerData, setCostumerData] = useState()
+  const [consultData, setConsultData] = useState()
 
   const [formData, setFormData] = useState({})
 
@@ -80,10 +80,10 @@ function DetailRequest() {
   useEffect(() => {
     if (userDetailData && token) {
       // console.log('print')
-      const getCustomerData = async () => {
+      const getConsultData = async () => {
         await axios
           .get(
-            `${process.env.NEXT_PUBLIC_API_URL}${userDetailData.data._links.customer.href}`,
+            `${process.env.NEXT_PUBLIC_API_URL}${userDetailData.data._links['consult-request'].href}`,
             {
               headers: {
                 Authorization: token,
@@ -91,13 +91,13 @@ function DetailRequest() {
             }
           )
           .then((response) => {
-            setCostumerData(response.data)
+            setConsultData(response.data)
             // console.log(response.data)
           })
           .catch((error) => console.log(error))
       }
 
-      // getCustomerData()
+      getConsultData()
     }
   }, [userDetailData, token])
 
@@ -157,12 +157,12 @@ function DetailRequest() {
                   <div className='rounded-full bg-gray-400 min-w-[90px] h-[90px]'>
                     <Image
                       src={
-                        customerData?.data.user.image.imagekit_url ||
+                        userDetailData?.data.user.image.imagekit_url ||
                         '/images/profileDefault.png'
                       }
                       width={90}
                       height={90}
-                      alt={customerData?.data.user.image.file_name}
+                      alt={userDetailData?.data.user.image.file_name}
                       className='rounded-full'
                     />
                   </div>
@@ -209,110 +209,58 @@ function DetailRequest() {
                     <td className="table-cell text-gray-500 font-base">{userDetailData?.data.acc_telp}</td>
                   </tr>
                 </table>
-
               </div>
-
-              {/* <form
-                onSubmit={handleSubmit(onSubmit)}
-                className='bg-white shadow-sm rounded-sm p-2 mt-3'
-              >
-                <InputFile
-                  label='User File'
-                  placeholder='Choose File'
-                  id='userFile'
-                  name='userFile'
-                  kelengkapanData={userFile}
-                  setKelengkapanData={setUserFile}
-                  errors={errors}
-                  register={register}
-                  errorText={'User File is Required'}
-                  required={true}
-                  handleInputChange={handleInputChange}
-                />
-                <div className='flex justify-between gap-2 my-2'>
-                  <button
-                    type='submit'
-                    className='bg-light-green hover:bg-green-700 text-white py-1 w-full rounded-sm'
-                  >
-                    Complete
-                  </button>
-                  <button
-                    type='reset'
-                    onClick={() => {
-                      setFormData({})
-                      setUserFile({})
-                    }}
-                    className='bg-red-500 hover:bg-red-700 text-white py-1 w-full rounded-sm'
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </form> */}
             </div>
-            {/* <div className='w-full bg-white shadow-sm rounded-md p-2'>
+            <div className='w-full bg-white shadow-sm rounded-md p-2'>
               <h3 className='font-bold text-xl text-gray-600'>
-                Request Details
+                Consult History
               </h3>
-              <div className='border-b-[1px]  border-solid border-gray-500 w-full p-8 flex flex-col sm:flex-row gap-8 justify-between'>
-                <div className=' flex flex-col gap-6'>
-                  <div className='text-gray-600 border-gray-500 flex gap-3'>
-                    <FaSuitcase className='w-6 h-6' />
-                    <div className=''>
-                      <h3 className='font-semibold text-lg mb-3'>
-                        Jasa Konsultasi
-                      </h3>
-                      <span>{userDetailData?.data.schedule.type.type}</span>
-                    </div>
-                  </div>
-                  <div className='text-gray-600 border-gray-500 flex gap-3'>
-                    <FaCalendarTimes className='w-6 h-6' />
-                    <div className=''>
-                      <h3 className='font-semibold text-lg mb-3'>
-                        Tanggal & Waktu Konsultasi
-                      </h3>
-                      <span>
-                        {userDetailData &&
-                          convertDate(userDetailData?.data.schedule.date)}
-                      </span>
-                    </div>
-                  </div>
-                  <div className='text-gray-600 border-gray-500 flex gap-3'>
-                    <HiLocationMarker className='w-6 h-6' />
-                    <div className=''>
-                      <h3 className='font-semibold text-lg mb-3'>
-                        Lokasi dan Alamat Konsultasi
-                      </h3>
-                      <span>
-                        {userDetailData?.data.schedule.place_type}{' '}
-                        {userDetailData?.data.schedule.place_type ===
-                          'Lainnya'
-                          ? `| ${userDetailData?.data.schedule.address}`
-                          : ''}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div className='w-full  sm:w-fit overflow-hidden'>
-                  <div className='flex gap-3 text-gray-600'>
-                    <HiLocationMarker className='w-6 h-6' />
-                    <span className='font-semibold text-lg mb-3'>
-                      Link Alamat (Gmaps)
-                    </span>
-                  </div>
-                  <Link
-                    href={userDetailData?.data.schedule.gmap_link || '#'}
-                    className='text-ellipsis '
-                    target='_blank'
-                  >
-                    {userDetailData?.data.schedule.gmap_link || '-'}
-                  </Link>
-                </div>
-              </div>
-              <div className='flex justify-end p-8 gap-8'>
-                <h4 className='text-lg font-medium'>Total Biaya Konsultasi</h4>
-                <span className='text-lg font-medium'>Rp1.000.000</span>
-              </div>
-            </div> */}
+              <table className=' bg-white border  border-gray-200  '>
+                <thead>
+                  <tr>
+                    <th className=' py-2 px-2 md:px-4 border-b'>No.</th>
+                    <th className=' py-2 px-2 md:px-4 border-b'>Jasa</th>
+                    <th className=' py-2 px-2 md:px-4 border-b'>Tanggal</th>
+                    <th className=' py-2 px-2 md:px-4 border-b'>Waktu</th>
+                    <th className=' py-2 px-2 md:px-4 border-b'>Lokasi</th>
+                    <th className=' py-2 px-2 md:px-4 border-b'>Alamat</th>
+                    <th className=' py-2 px-2 md:px-4 border-b'>Link</th>
+                    <th className=' py-2 px-2 md:px-4 border-b'>Biaya</th>
+                    <th className=' py-2 px-2 md:px-4 border-b'>Status</th>
+                  </tr>
+                </thead>
+                <tbody className=''>
+                  {consultData?.data?.map((item, index) => (
+                    <tr
+                      key={index}
+                      className={index % 2 === 0 ? 'bg-gray-50' : ''}
+                    >
+                      <td className='py-2 px-2 md:px-4 border-b'>{index + 1}</td>
+                      <td className='py-2 px-2 md:px-4 border-b'>
+                        tes
+                      </td>
+                      <td className='py-2 px-2 md:px-4 border-b'>tes</td>
+                      <td className='py-2 px-2 md:px-4 border-b'>
+                        tes
+                      </td>
+                      <td className='py-2 px-2 md:px-4 border-b'>{item?.place_type}</td>
+                      <td className='py-2 px-2 md:px-4 border-b'>
+                        {item?.address}
+                      </td>
+                      <td className='py-2 px-2 md:px-4 border-b'>
+                        {item?.gmap_link}
+                      </td>
+                      <td className='py-2 px-2 md:px-4 border-b'>
+                        {item?.consultation?.cost}
+                      </td>
+                      <td className='py-2 px-2 md:px-4 border-b'>
+                        {item?.status}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </AdminVerificationProvider>
