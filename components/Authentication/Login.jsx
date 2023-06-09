@@ -22,6 +22,25 @@ function Login() {
 
   const [isLoading, setIsLoading] = useState(false)
 
+  const [windowHeight, setWindowHeight] = useState(0)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowHeight(window.innerHeight)
+    }
+
+    // Initial height
+    setWindowHeight(window.innerHeight)
+
+    // Event listener for window resize
+    window.addEventListener('resize', handleResize)
+
+    // Clean up the event listener
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
   const validateEmail = (value) => {
     if (!value) {
       return 'Email is required'
@@ -96,7 +115,13 @@ function Login() {
 
   return (
     <MainLayout>
-      <div className='justify-center  md:justify-normal flex sm:gap-4 lg:gap-16 h-full  2xl:h-[calc(100vh-361px)] items-center'>
+      <div
+        className={`justify-center  md:justify-normal flex sm:gap-4 lg:gap-16 ${
+          windowHeight > 800
+            ? 'h-[calc(100vh-288px)] sm:h-[calc(100vh-475px)]'
+            : 'h-full'
+        }  2xl:h-[calc(100vh-361px)] items-center`}
+      >
         <div className='justify-center sm:w-fit lg:w-1/2 hidden md:flex  md:justify-center'>
           <div className='sm:w-[350px] object-cover flex items-center justify-center'>
             <Image
