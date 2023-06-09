@@ -173,7 +173,7 @@ function DetailRequest() {
             </Link>
             <div className='flex flex-row gap-3 item-stretch'>
               <Link
-                href={`/admin/users/${userDetailData?.data?.user_id}/edit`}
+                href={`/admin/users/${userDetailData?.data?.id}/edit`}
                 className='flex gap-2 items-center font-bold py-1 px-2 md:px-2 rounded bg-yellow-400 hover:bg-orange-700 text-white w-fit mb-3'
               >
                 Edit
@@ -261,8 +261,7 @@ function DetailRequest() {
                   <tr>
                     <th className=' py-2 px-2 md:px-4 border-b'>No.</th>
                     <th className=' py-2 px-2 md:px-4 border-b'>Jasa</th>
-                    <th className=' py-2 px-2 md:px-4 border-b'>Tanggal</th>
-                    <th className=' py-2 px-2 md:px-4 border-b'>Waktu</th>
+                    <th className=' py-2 px-2 md:px-4 border-b'>Tanggal/Waktu</th>
                     <th className=' py-2 px-2 md:px-4 border-b'>Lokasi</th>
                     <th className=' py-2 px-2 md:px-4 border-b'>Alamat</th>
                     <th className=' py-2 px-2 md:px-4 border-b'>Link</th>
