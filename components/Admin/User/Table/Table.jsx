@@ -108,13 +108,28 @@ const Table = () => {
               <td className='py-2 px-2 md:px-4 border-b'>
                 {item?.name}
               </td>
-              <td className='py-2 px-2 md:px-4 border-b'>{item?.type?.type}</td>
+              <td className='py-2 px-2 md:px-4 border-b'>{item?.user?.email}</td>
               <td className='py-2 px-2 md:px-4 border-b'>
-                {/* {convertDate(item?.date)} */}
+                {item?.npwp}
               </td>
-              <td className='py-2 px-2 md:px-4 border-b'>{item?.place_type}</td>
+              <td className='py-2 px-2 md:px-4 border-b'>{item?.address}</td>
               <td className='py-2 px-2 md:px-4 border-b'>
-                {item?.address || '-'}
+                {item?.leader_name}
+              </td>
+              <td className='py-2 px-2 md:px-4 border-b'>
+                {item?.leader_title}
+              </td>
+              <td className='py-2 px-2 md:px-4 border-b'>
+                {item?.pkp}
+              </td>
+              <td className='py-2 px-2 md:px-4 border-b'>
+                {item?.business_type}
+              </td>
+              <td className='py-2 px-2 md:px-4 border-b'>
+                {item?.acc_name}
+              </td>
+              <td className='py-2 px-2 md:px-4 border-b'>
+                {item?.acc_telp}
               </td>
               <td className='py-2 px-2 md:px-4 border-b '>
                 <div className=' flex flex-wrap items-center justify-center gap-2'>
