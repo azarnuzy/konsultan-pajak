@@ -20,6 +20,54 @@ export default function EditUser() {
                         <FaArrowLeft />
                         Back
                     </Link>
+                    <div className='bg-white shadow-sm rounded-sm p-2'>
+                        <h3 className='font-bold text-xl text-gray-600'>
+                            Edit User
+                        </h3>
+                        <table className="table gap-3">
+                            <tr>
+                                <td className="table-cell text-gray-500 font-medium">Nama WP</td>
+                                <td className="table-cell text-gray-500 font-base"><input type="text" className='border border-gray-300 rounded-md ml-5 mb-2' /></td>
+                            </tr>
+                            <tr>
+                                <td className="table-cell text-gray-500 font-medium">Email</td>
+                                <td className="table-cell text-gray-500 font-base"><input type="text" className='border border-gray-300 rounded-md ml-5 mb-2' /></td>
+                            </tr>
+                            <tr>
+                                <td className="table-cell text-gray-500 font-medium">NPWP</td>
+                                <td className="table-cell text-gray-500 font-base"><input type="text" className='border border-gray-300 rounded-md ml-5 mb-2' /></td>
+                            </tr>
+                            <tr>
+                                <td className="table-cell text-gray-500 font-medium">Alamat</td>
+                                <td className="table-cell text-gray-500 font-base"><input type="text" className='border border-gray-300 rounded-md ml-5 mb-2' /></td>
+                            </tr>
+                            <tr>
+                                <td className="table-cell text-gray-500 font-medium">Nama Pimpinan</td>
+                                <td className="table-cell text-gray-500 font-base"><input type="text" className='border border-gray-300 rounded-md ml-5 mb-2' /></td>
+                            </tr>
+                            <tr>
+                                <td className="table-cell text-gray-500 font-medium">Jabatan Pimpinan</td>
+                                <td className="table-cell text-gray-500 font-base"><input type="text" className='border border-gray-300 rounded-md ml-5 mb-2' /></td>
+                            </tr>
+                            <tr>
+                                <td className="table-cell text-gray-500 font-medium">PKP</td>
+                                <td className="table-cell text-gray-500 font-base"><input type="text" className='border border-gray-300 rounded-md ml-5 mb-2' /></td>
+                            </tr>
+                            <tr>
+                                <td className="table-cell text-gray-500 font-medium">Jenis Usaha</td>
+                                <td className="table-cell text-gray-500 font-base"><input type="text" className='border border-gray-300 rounded-md ml-5 mb-2' /></td>
+                            </tr>
+                            <tr>
+                                <td className="table-cell text-gray-500 font-medium">Nama Akunting</td>
+                                <td className="table-cell text-gray-500 font-base"><input type="text" className='border border-gray-300 rounded-md ml-5 mb-2' /></td>
+                            </tr>
+                            <tr>
+                                <td className="table-cell text-gray-500 font-medium">Kontak Akunting</td>
+                                <td className="table-cell text-gray-500 font-base"><input type="text" className='border border-gray-300 rounded-md ml-5 mb-2' /></td>
+                            </tr>
+                        </table>
+                        <button className='flex gap-2 items-center font-bold py-1 px-2 md:px-4 rounded bg-green-600 hover:bg-green-700 text-white w-fit my-3'>Save</button>
+                    </div>
                 </div>
             </AdminVerificationProvider>
         </AdminLayout>

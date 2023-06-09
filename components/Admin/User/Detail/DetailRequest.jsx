@@ -174,7 +174,7 @@ function DetailRequest() {
             <div className='flex flex-row gap-3 item-stretch'>
               <Link
                 href={`/admin/users/${userDetailData?.data?.id}/edit`}
-                className='flex gap-2 items-center font-bold py-1 px-2 md:px-2 rounded bg-yellow-400 hover:bg-orange-700 text-white w-fit mb-3'
+                className='flex gap-2 items-center font-bold py-1 px-2 md:px-2 rounded bg-yellow-400 hover:bg-yellow-600 text-white w-fit mb-3'
               >
                 Edit
               </Link>
