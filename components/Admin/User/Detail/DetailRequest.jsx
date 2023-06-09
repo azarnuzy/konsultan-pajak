@@ -21,11 +21,11 @@ import {
 import { HiLocationMarker } from 'react-icons/hi'
 
 function DetailRequest() {
-  const [consultFile, setConsultFile] = useState({
-    consultFile: '',
+  const [userFile, setUserFile] = useState({
+    userFile: '',
   })
 
-  const [consultDetailData, setConsultDetailData] = useState()
+  const [userDetailData, setUserDetailData] = useState()
   const [customerData, setCostumerData] = useState()
 
   const [formData, setFormData] = useState({})
@@ -51,15 +51,15 @@ function DetailRequest() {
   }
 
   useEffect(() => {
-    console.log(consultFile)
-  }, [consultFile])
+    console.log(userFile)
+  }, [userFile])
 
   useEffect(() => {
     if (id && token) {
-      const getConsultationsDetail = async () => {
+      const getUsersDetail = async () => {
         await axios
           .get(
-            `${process.env.NEXT_PUBLIC_API_URL}/api/v1/consultations/${id}`,
+            `${process.env.NEXT_PUBLIC_API_URL}/api/v1/customers/${id}`,
             {
               headers: {
                 Authorization: token,
@@ -67,23 +67,23 @@ function DetailRequest() {
             }
           )
           .then((response) => {
-            setConsultDetailData(response.data)
+            setUserDetailData(response.data)
             // console.log(response.data)
           })
           .catch((error) => console.log(error))
       }
 
-      getConsultationsDetail()
+      getUsersDetail()
     }
   }, [id, token])
 
   useEffect(() => {
-    if (consultDetailData && token) {
+    if (userDetailData && token) {
       // console.log('print')
       const getCustomerData = async () => {
         await axios
           .get(
-            `${process.env.NEXT_PUBLIC_API_URL}${consultDetailData.data._links.customer.href}`,
+            `${process.env.NEXT_PUBLIC_API_URL}${userDetailData.data._links.customer.href}`,
             {
               headers: {
                 Authorization: token,
@@ -97,15 +97,15 @@ function DetailRequest() {
           .catch((error) => console.log(error))
       }
 
-      getCustomerData()
+      // getCustomerData()
     }
-  }, [consultDetailData, token])
+  }, [userDetailData, token])
 
   const onSubmit = async () => {
     const formData = new FormData()
     setIsLoading(true)
-    formData.append('doc', consultFile.consultFile[0])
-    formData.append('consultation_id', consultDetailData?.data.id)
+    formData.append('doc', userFile.userFile[0])
+    formData.append('useration_id', userDetailData?.data.id)
     await axios
       .post(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/documents`, formData, {
         headers: {
@@ -139,9 +139,9 @@ function DetailRequest() {
           status={status}
         />
         <div className='max-h-[calc(100vh-100px)] overflow-scroll container-table  mx-auto'>
-          <h1 className='admin-title'>Consult Task Details</h1>
+          <h1 className='admin-title'>User Details</h1>
           <Link
-            href={'/admin/consultant-task'}
+            href={'/admin/users'}
             className='flex gap-2 items-center font-bold py-1 px-2 md:px-2 rounded bg-blue-500 hover:bg-blue-700 text-white w-fit mb-3'
           >
             <FaArrowLeft />
@@ -168,34 +168,64 @@ function DetailRequest() {
                   </div>
                   <div className='flex flex-col gap-2 max-w-fit'>
                     <h4 className='text-gray-700 font-semibold text-lg'>
-                      {customerData?.data.name}
+                      {userDetailData?.data.name}
                     </h4>
                     <div className='flex gap-2 text-gray-600 items-center'>
                       <FaEnvelope />
-                      {customerData?.data.user.email}
+                      {userDetailData?.data.user.email}
                     </div>
                     <div className='flex gap-2 text-gray-600 items-center'>
                       <HiLocationMarker />
-                      {customerData?.data.address}
+                      {userDetailData?.data.address}
                     </div>
                   </div>
                 </div>
+                <h3 className='font-bold text-xl text-gray-600 mt-5'>
+                  Detail Info
+                </h3>
+                <table className="table">
+                  <tr>
+                    <td className="table-cell text-gray-500 font-medium">Nama Pimpinan</td>
+                    <td className="table-cell text-gray-500 font-base">{userDetailData?.data.leader_name}</td>
+                  </tr>
+                  <tr>
+                    <td className="table-cell text-gray-500 font-medium">Jabatan Pimpinan</td>
+                    <td className="table-cell text-gray-500 font-base">{userDetailData?.data.leader_title}</td>
+                  </tr>
+                  <tr>
+                    <td className="table-cell text-gray-500 font-medium">PKP</td>
+                    <td className="table-cell text-gray-500 font-base">{userDetailData?.data.pkp}</td>
+                  </tr>
+                  <tr>
+                    <td className="table-cell text-gray-500 font-medium">Jenis Usaha</td>
+                    <td className="table-cell text-gray-500 font-base">{userDetailData?.data.business_type}</td>
+                  </tr>
+                  <tr>
+                    <td className="table-cell text-gray-500 font-medium">Nama Akunting</td>
+                    <td className="table-cell text-gray-500 font-base">{userDetailData?.data.acc_name}</td>
+                  </tr>
+                  <tr>
+                    <td className="table-cell text-gray-500 font-medium">Kontak Akunting</td>
+                    <td className="table-cell text-gray-500 font-base">{userDetailData?.data.acc_telp}</td>
+                  </tr>
+                </table>
+
               </div>
 
-              <form
+              {/* <form
                 onSubmit={handleSubmit(onSubmit)}
                 className='bg-white shadow-sm rounded-sm p-2 mt-3'
               >
                 <InputFile
-                  label='Consult File'
+                  label='User File'
                   placeholder='Choose File'
-                  id='consultFile'
-                  name='consultFile'
-                  kelengkapanData={consultFile}
-                  setKelengkapanData={setConsultFile}
+                  id='userFile'
+                  name='userFile'
+                  kelengkapanData={userFile}
+                  setKelengkapanData={setUserFile}
                   errors={errors}
                   register={register}
-                  errorText={'Consult File is Required'}
+                  errorText={'User File is Required'}
                   required={true}
                   handleInputChange={handleInputChange}
                 />
@@ -210,16 +240,16 @@ function DetailRequest() {
                     type='reset'
                     onClick={() => {
                       setFormData({})
-                      setConsultFile({})
+                      setUserFile({})
                     }}
                     className='bg-red-500 hover:bg-red-700 text-white py-1 w-full rounded-sm'
                   >
                     Cancel
                   </button>
                 </div>
-              </form>
+              </form> */}
             </div>
-            <div className='w-full bg-white shadow-sm rounded-md p-2'>
+            {/* <div className='w-full bg-white shadow-sm rounded-md p-2'>
               <h3 className='font-bold text-xl text-gray-600'>
                 Request Details
               </h3>
@@ -231,7 +261,7 @@ function DetailRequest() {
                       <h3 className='font-semibold text-lg mb-3'>
                         Jasa Konsultasi
                       </h3>
-                      <span>{consultDetailData?.data.schedule.type.type}</span>
+                      <span>{userDetailData?.data.schedule.type.type}</span>
                     </div>
                   </div>
                   <div className='text-gray-600 border-gray-500 flex gap-3'>
@@ -241,8 +271,8 @@ function DetailRequest() {
                         Tanggal & Waktu Konsultasi
                       </h3>
                       <span>
-                        {consultDetailData &&
-                          convertDate(consultDetailData?.data.schedule.date)}
+                        {userDetailData &&
+                          convertDate(userDetailData?.data.schedule.date)}
                       </span>
                     </div>
                   </div>
@@ -253,10 +283,10 @@ function DetailRequest() {
                         Lokasi dan Alamat Konsultasi
                       </h3>
                       <span>
-                        {consultDetailData?.data.schedule.place_type}{' '}
-                        {consultDetailData?.data.schedule.place_type ===
-                        'Lainnya'
-                          ? `| ${consultDetailData?.data.schedule.address}`
+                        {userDetailData?.data.schedule.place_type}{' '}
+                        {userDetailData?.data.schedule.place_type ===
+                          'Lainnya'
+                          ? `| ${userDetailData?.data.schedule.address}`
                           : ''}
                       </span>
                     </div>
@@ -270,11 +300,11 @@ function DetailRequest() {
                     </span>
                   </div>
                   <Link
-                    href={consultDetailData?.data.schedule.gmap_link || '#'}
+                    href={userDetailData?.data.schedule.gmap_link || '#'}
                     className='text-ellipsis '
                     target='_blank'
                   >
-                    {consultDetailData?.data.schedule.gmap_link || '-'}
+                    {userDetailData?.data.schedule.gmap_link || '-'}
                   </Link>
                 </div>
               </div>
@@ -282,7 +312,7 @@ function DetailRequest() {
                 <h4 className='text-lg font-medium'>Total Biaya Konsultasi</h4>
                 <span className='text-lg font-medium'>Rp1.000.000</span>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </AdminVerificationProvider>

@@ -136,21 +136,13 @@ const Table = () => {
                   {/* <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 md:px-4 rounded mr-2'>
                   Update
                 </button> */}
-                  <button
-                    className={`flex gap-2 items-center ${
-                      item?.status === 'Accepted'
-                        ? 'text-slate-200 bg-green-300'
-                        : 'text-white hover:bg-green-700 bg-green-500 '
-                    } font-bold py-1 px-2 md:px-2 rounded `}
-                    onClick={() => {
-                      handleAccept(item?.id)
-                    }}
-                    disabled={item?.status === 'Accepted'}
+                  <Link
+                    href={`/admin/users/${item?.id}`}
+                    className='flex gap-2 items-center font-bold py-1 px-2 md:px-2 rounded bg-blue-500 hover:bg-blue-700 text-white'
                   >
-                    <FaCheckCircle />
-                    {item?.status === 'Accepted' ? 'Accepted' : 'Accept'}
-                    {/* Accept */}
-                  </button>
+                    <FaInfoCircle />
+                    Detail
+                  </Link>
                   <button
                     className={`flex gap-2 items-center font-bold py-1 px-2 md:px-2 rounded   ${
                       item?.status === 'Accepted'
