@@ -8,6 +8,8 @@ import 'swiper/css/navigation'
 import { ourClient } from '@/helpers/landingPageData'
 import { Navigation } from 'swiper'
 
+import Image from 'next/image'
+
 function OurClient() {
   const data = ourClient
   const [slidesPerView, setSlidesPerView] = useState(4)
@@ -57,7 +59,7 @@ function OurClient() {
             className='mx-2 sm:mx-5'
           >
             <div className='w-[156px] h-[156px] flex items-center justify-center bg-light-gray '>
-              {item.name}
+              <Image src={`/images/clients/${item.logo}`} alt={item.name} width={156} height={156}/>
             </div>
           </SwiperSlide>
         ))}

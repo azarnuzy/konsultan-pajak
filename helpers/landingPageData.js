@@ -178,40 +178,36 @@ export const ourService = [
 
 export const ourClient = [
   {
-    logo: 'logoClient1.png',
-    name: 'Logo Client',
+    logo: 'cv_padajaya_pelita.png',
+    name: 'CV Padajaya Pelita',
   },
   {
-    logo: 'logoClient1.png',
-    name: 'Logo Client',
+    logo: 'irman_jaya_express.png',
+    name: 'Irman Jaya Express',
   },
   {
-    logo: 'logoClient1.png',
-    name: 'Logo Client',
+    logo: 'mks.png',
+    name: 'MKS',
   },
   {
-    logo: 'logoClient1.png',
-    name: 'Logo Client',
+    logo: 'pt_garindo_persada_trans.png',
+    name: 'PT Garindo Persada Trans',
   },
   {
-    logo: 'logoClient1.png',
-    name: 'Logo Client',
+    logo: 'pt_indomas_putrajaya.png',
+    name: 'PT Indomas Putrajaya',
   },
   {
-    logo: 'logoClient1.png',
-    name: 'Logo Client',
+    logo: 'pt_niaga_handal_cemerlang.png',
+    name: 'PT Niaga Handal Cemerlang',
   },
   {
-    logo: 'logoClient1.png',
-    name: 'Logo Client',
+    logo: 'pt_pradia_tours_travel.png',
+    name: 'PT Pradia Tours Travel',
   },
   {
-    logo: 'logoClient1.png',
-    name: 'Logo Client',
-  },
-  {
-    logo: 'logoClient1.png',
-    name: 'Logo Client',
+    logo: 'pt_putihbersih_dermaessen_indonesia.png',
+    name: 'PT Putihbersih Dermaessen Indonesia',
   },
 ]
 
