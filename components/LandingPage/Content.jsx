@@ -53,8 +53,8 @@ function Content() {
           <Image
             src={`/images/${data.content2.sideImg}`}
             alt='Side Image 2'
-            width={350}
-            height={330}
+            width={500}
+            height={500}
             className='object-cover'
           />
         </div>
