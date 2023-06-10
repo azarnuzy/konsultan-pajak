@@ -79,10 +79,10 @@ export const contentData = {
       },
       {
         logo: 'Protect.svg',
-        title: '01',
-        subtitle: 'Pengalaman Tinggi',
+        title: '02',
+        subtitle: 'Jaminan Aman',
         description:
-          'Berpengalaman dalam bidang perpajakan selama lebih dari 15 tahun baik sebagai konsultan pajak maupun auditor pada kantor akuntan publik yang pernah menangani klien dari berbagai jenis usaha yang berbeda baik sekala kecil maupun besar.',
+          'Terhindar dari resiko kesalahan perpajakan dikemudian hari, sehingga wajib pajak dapat fokus kepada usaha dan pengembangan bisnisnya.',
       },
     ],
   },
@@ -164,15 +164,15 @@ export const ourService = [
   },
   {
     logo: 'BlockChain.svg',
-    title: 'Penyusunan Manual Pajak Perusahaan',
+    title: 'Penyusunan Transfer Pricing Documentation',
     description:
-      'Membantu klien perusahaan menyusun pedoman perpajakan yang berisis kebijakan, strategi, prosedur, pelaporan, dan petunjuk teknis perhitungan pajak.',
+      'Memberikan masukan pada dokumen dan strategi yang diperlukan untuk mencegah kerugian dari transaksi pihak terkait dan skenario transfer pricing.',
   },
   {
     logo: 'Scales.svg',
-    title: 'Penyusunan Manual Pajak Perusahaan',
+    title: 'Penyusunan Asistensi Pajak',
     description:
-      'Membantu klien perusahaan menyusun pedoman perpajakan yang berisis kebijakan, strategi, prosedur, pelaporan, dan petunjuk teknis perhitungan pajak.',
+      'Membantu klien perusahaan dalam asistensi pemeriksaan pajak, keberatan pajak, banding pajak, kepatuhan/compliance pajak, dan jasa advisory pajak.',
   },
 ]
 
