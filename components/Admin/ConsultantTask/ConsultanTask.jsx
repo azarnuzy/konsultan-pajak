@@ -11,7 +11,7 @@ function ConsultanTask() {
       <AdminVerificationProvider>
         {' '}
         <div className='max-h-[calc(100vh-70px)] mx-auto'>
-          <h1 className='admin-title'>Consultant Request</h1>
+          <h1 className='admin-title'>Consultation Task</h1>
           <SearchBar />
           <Table />
           <Pagination />

@@ -14,6 +14,8 @@ function AdminVerificationProvider({ children }) {
   const [taskData, setTaskData] = useState([])
   const [customerData, setCustomerData] = useState([])
 
+  const [update, setUpdate] = useState(false);
+
   const router = useRouter()
   const { pathname } = router
 
@@ -67,6 +69,7 @@ function AdminVerificationProvider({ children }) {
 
   // console.log(pathname)
   useEffect(() => {
+    console.log(update);
     if (token) {
       if (pathname.includes('request')) {
         fetchData('schedules')
@@ -76,7 +79,7 @@ function AdminVerificationProvider({ children }) {
         fetchData('customers')
       }
     }
-  }, [pathname, token])
+  }, [pathname, token, update])
 
   // Handle search term change
   const handleSearchTermChange = (event) => {
@@ -97,7 +100,8 @@ function AdminVerificationProvider({ children }) {
         taskData,
         setTaskData,
         customerData,
-        setCustomerData
+        setCustomerData,
+        update, setUpdate
       }}
     >
       {children}

@@ -65,6 +65,11 @@ function JadwalKonsultasi() {
       name: 'place_type',
     },
     {
+      id: 'online',
+      value: 'Online',
+      name: 'place_type',
+    },
+    {
       id: 'Lainnya',
       value: 'Lainnya',
       name: 'place_type',

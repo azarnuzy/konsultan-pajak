@@ -14,17 +14,17 @@ export default function RiwayatKonsultasi() {
   const { consultRequest, consultOngoing, consultDone, user } = useAuth()
 
   let [categories, setCategories] = useState({
-    'Menunggu Verifikasi': [],
-    'Sedang Berjalan': [],
-    Selesai: [],
+    'Daftar Appointment': [],
+    'Konsultasi Berjalan': [],
+    'Konsultasi Selesai': [],
   })
 
   useEffect(() => {
     console.log(consultRequest)
     setCategories({
-      'Menunggu Verifikasi': consultRequest,
-      'Sedang Berjalan': consultOngoing,
-      Selesai: consultDone,
+      'Daftar Appointment': consultRequest,
+      'Konsultasi Berjalan': consultOngoing,
+      'Konsultasi Selesai': consultDone,
     })
     // console.log(user)
     // console.log(consultRequest)
@@ -53,6 +53,7 @@ export default function RiwayatKonsultasi() {
         </Tab.List>
         <Tab.Panels className='mt-2'>
           {Object.values(categories).map((posts, idx) => (
+            
             <Tab.Panel
               key={idx}
               className={classNames('rounded-xl bg-white p-3')}
@@ -107,18 +108,33 @@ export default function RiwayatKonsultasi() {
                                 Link Alamat (Gmaps)
                               </span>
                             </div>
-                            <span className='text-ellipsis '>
+                            {/* <span className='text-ellipsis '>
                               {item.gmap_link || '-'}
-                            </span>
+                              
+                            </span> */}
+                            <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.2457089488134!2d107.59177497329686!3d-6.8611285671234725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e6b943c2c5ff%3A0xee36226510a79e76!2sUniversitas%20Pendidikan%20Indonesia!5e0!3m2!1sid!2sid!4v1686404036268!5m2!1sid!2sid" 
+          width="400"
+          height="200"
+          style={{ border: 0 }}
+          allowFullScreen=""
+          loading="lazy"
+        ></iframe>
+        
                           </div>
                         </div>
-                        <div className='flex justify-end p-8 gap-8'>
-                          <h4 className='text-lg font-medium'>
-                            Total Biaya Konsultasi
-                          </h4>
-                          <span className='text-lg font-medium'>
-                            Rp1.000.000
-                          </span>
+                        <div className='flex justify-between p-8 gap-8'>
+                          <div className='text-lg font-medium'>
+                            {`${item?.status} | ${item?.consultation?.status ? item?.consultation?.status : `-`}` || '-'}
+                          </div>
+                          <div className='flex justify-end gap-8'>
+                            <h4 className='text-lg font-medium'>
+                              Total Biaya Konsultasi
+                            </h4>
+                            <span className='text-lg font-medium'>
+                              Rp1.000.000
+                            </span>
+                          </div>
                         </div>
                       </div>
                       <div

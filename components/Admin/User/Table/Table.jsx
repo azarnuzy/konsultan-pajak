@@ -87,14 +87,7 @@ const Table = () => {
             <th className=' py-2 px-2 md:px-4 border-b'>No.</th>
             <th className=' py-2 px-2 md:px-4 border-b'>Nama WP</th>
             <th className=' py-2 px-2 md:px-4 border-b'>Email</th>
-            <th className=' py-2 px-2 md:px-4 border-b'>NPWP</th>
-            <th className=' py-2 px-2 md:px-4 border-b'>Alamat WP</th>
-            <th className=' py-2 px-2 md:px-4 border-b'>Nama Pimpinan</th>
-            <th className=' py-2 px-2 md:px-4 border-b'>Jabatan Pimpinan</th>
-            <th className=' py-2 px-2 md:px-4 border-b'>PKP</th>
-            <th className=' py-2 px-2 md:px-4 border-b'>Jenis Usaha</th>
-            <th className=' py-2 px-2 md:px-4 border-b'>Nama Akunting/Pajak/Admin</th>
-            <th className=' py-2 px-2 md:px-4 border-b'>No. WA Akunting/Pajak/Admin</th>
+            <th className=' py-2 px-2 md:px-4 border-b'>Telp</th>
             <th className=' py-2 px-2 md:px-4 border-b'>Actions</th>
           </tr>
         </thead>
@@ -110,25 +103,6 @@ const Table = () => {
               </td>
               <td className='py-2 px-2 md:px-4 border-b'>{item?.user?.email}</td>
               <td className='py-2 px-2 md:px-4 border-b'>
-                {item?.npwp}
-              </td>
-              <td className='py-2 px-2 md:px-4 border-b'>{item?.address}</td>
-              <td className='py-2 px-2 md:px-4 border-b'>
-                {item?.leader_name}
-              </td>
-              <td className='py-2 px-2 md:px-4 border-b'>
-                {item?.leader_title}
-              </td>
-              <td className='py-2 px-2 md:px-4 border-b'>
-                {item?.pkp}
-              </td>
-              <td className='py-2 px-2 md:px-4 border-b'>
-                {item?.business_type}
-              </td>
-              <td className='py-2 px-2 md:px-4 border-b'>
-                {item?.acc_name}
-              </td>
-              <td className='py-2 px-2 md:px-4 border-b'>
                 {item?.acc_telp}
               </td>
               <td className='py-2 px-2 md:px-4 border-b '>
@@ -141,7 +115,6 @@ const Table = () => {
                     className='flex gap-2 items-center font-bold py-1 px-2 md:px-2 rounded bg-blue-500 hover:bg-blue-700 text-white'
                   >
                     <FaInfoCircle />
-                    Detail
                   </Link>
                   <button
                     className={`flex gap-2 items-center font-bold py-1 px-2 md:px-2 rounded   ${
@@ -155,7 +128,6 @@ const Table = () => {
                     }}
                   >
                     <FaTrash />
-                    Delete
                   </button>
                 </div>
               </td>

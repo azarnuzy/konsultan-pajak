@@ -17,15 +17,15 @@ const AdminLayout = ({ children }) => {
 
   const data = [
     {
-      name: 'Users',
+      name: 'Clients',
       link: '/admin/users',
     },
     {
-      name: 'Consultant Request',
+      name: 'Consult Request',
       link: '/admin/consultant-request',
     },
     {
-      name: 'Consult Task',
+      name: 'Consultation Task',
       link: '/admin/consultant-task',
     },
   ]

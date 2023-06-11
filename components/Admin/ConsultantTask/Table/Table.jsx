@@ -11,7 +11,7 @@ import { FaCross, FaInfoCircle, FaPlay, FaStopCircle } from 'react-icons/fa'
 import { MdClose, MdStart } from 'react-icons/md'
 
 const Table = () => {
-  const { taskData, getPaginationData } = useAdminVerificationContext()
+  const { taskData, getPaginationData, setUpdate, update } = useAdminVerificationContext()
   const { token, handleNotification } = useAuth()
   // console.log(userData)
   const [isLoading, setIsLoading] = useState(false)
@@ -55,7 +55,7 @@ const Table = () => {
     setIsLoading(true)
     await axios
       .put(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/consultations/${id}/end`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/consultations/${id}/end`, '',
         {
           headers: {
             Authorization: token,
@@ -66,7 +66,8 @@ const Table = () => {
         setStatus(response.status)
         setMessage(response.data.message)
         handleNotification()
-        getPaginationData(data?.pagination?.currentPage, 10, 'consultations')
+        getPaginationData(taskData?.pagination?.currentPage, 10, 'consultations')
+        setUpdate(!update)
         // setData(updatedData)
       })
       .catch((error) => {

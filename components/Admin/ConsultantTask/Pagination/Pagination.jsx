@@ -2,7 +2,7 @@ import { useAdminVerificationContext } from '@/context/consultant-request-contex
 import { useState } from 'react'
 
 const Pagination = ({ onPageChange }) => {
-  const { taskData, getPaginationSchedules, setTaskData } =
+  const { taskData, getPaginationData, setTaskData } =
     useAdminVerificationContext()
 
   const [inputPage, setInputPage] = useState(
@@ -12,25 +12,25 @@ const Pagination = ({ onPageChange }) => {
   const handlePageChange = (page) => {
     setInputPage(page)
     setTaskData({
-      ...data,
+      ...taskData,
       pagination: {
-        ...data.pagination,
+        ...taskData.pagination,
         currentPage: page,
       },
     })
-    getPaginationSchedules(page, 10, 'consultations')
+    getPaginationData(page, 10, 'consultations')
   }
 
   const handleInputChange = (e) => {
     setInputPage(e.target.value)
     setTaskData({
-      ...data,
+      ...taskData,
       pagination: {
-        ...data.pagination,
+        ...taskData.pagination,
         currentPage: e.target.value,
       },
     })
-    getPaginationSchedules(e.target.value, 10, 'consultations')
+    getPaginationData(e.target.value, 10, 'consultations')
   }
 
   const handleInputBlur = () => {

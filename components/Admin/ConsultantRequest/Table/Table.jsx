@@ -143,7 +143,7 @@ const Table = () => {
                     }}
                   >
                     <FaTrash />
-                    Decline
+                    {item?.status === 'Declined' ? 'Declined' : 'Decline'}
                   </button>
                 </div>
               </td>
