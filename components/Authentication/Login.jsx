@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import LoadingSpinner from '../Loading/LoadingSpinner'
+import Notification from '../Loading/Notification'
 
 function Login() {
   const {
@@ -15,11 +16,14 @@ function Login() {
     formState: { errors },
   } = useForm()
 
-  const { login, previousPath, setPreviousPath } = useAuth()
+  const { login, previousPath, setPreviousPath, handleNotification } = useAuth()
+
   const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const [message, setMessage] = useState()
+  const [status, setStatus] = useState()
   const [isLoading, setIsLoading] = useState(false)
 
   const [windowHeight, setWindowHeight] = useState(0)
@@ -66,17 +70,12 @@ function Login() {
     return true
   }
 
-  // useEffect(() => {
-  //   console.log(errors)
-  // }, [errors])
-
   const onSubmit = async (data) => {
-    // console.log(data)
     setIsLoading(true)
     const response = await login(data)
-    // console.log(response)
-    // console.log(response?.data)
+
     setIsLoading(false)
+
     if (response?.data) {
       if (response?.data.status) {
         if (response?.data.message?.includes('User')) {
@@ -84,37 +83,37 @@ function Login() {
             type: 'manual',
             message: response?.data.message,
           })
-        } else {
+        } else if (response?.data.message?.includes('password')) {
           setError('password', {
             type: 'manual',
             message: response?.data.message,
           })
+        } else {
+          setMessage(response?.data.message)
+          setStatus(response?.data.status)
+          handleNotification()
         }
       }
 
-      // if(response.data)
-      // if (previousPath !== '/') {
-      //   router.push(`${previousPath}`)
-      // } else {
-      //   if (
-      //     response?.data?.role === 'Admin' ||
-      //     response?.data?.role === 'Teachers'
-      //   ) {
-      //     router.push('/admin')
-      //   }
-      //   if (response?.data?.role === 'Users') {
-      //     router.push('/')
-      //   }
-      // }
+      // console.log(response?.data)
+      if (response?.data.role_id === 3) {
+        router.push('/')
+      } else if (response?.data.role_id === 1 || response?.data.role_id === 2) {
+        router.push('/admin')
+      }
       setPreviousPath('/')
     } else {
       // console.log(response)
-      router.push('/')
     }
   }
 
+  // console.log(errors)
   return (
     <MainLayout>
+      <Notification
+        message={message}
+        status={status}
+      />
       <div
         className={`justify-center  md:justify-normal flex sm:gap-4 lg:gap-16 ${
           windowHeight > 800

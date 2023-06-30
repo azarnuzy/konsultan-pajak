@@ -5,15 +5,22 @@ import { FaUserCircle, FaUsers } from 'react-icons/fa'
 import { MdPendingActions, MdTask } from 'react-icons/md'
 import { HiBell, HiChat, HiLogout, HiMail, HiStop } from 'react-icons/hi'
 import { useAuth } from '@/context/auth-context'
+import Cookies from 'js-cookie'
+import { useRouter } from 'next/router'
 
 const AdminLayout = ({ children }) => {
   const [isMounted, setIsMounted] = useState(false)
 
   const { logout } = useAuth()
 
+  const router = useRouter()
   useEffect(() => {
+    const role_id = localStorage.getItem('role_id')
+    if (role_id !== 1 || role_id !== 2) {
+      router.push('/')
+    }
     setIsMounted(true)
-  }, [])
+  }, [router])
 
   const data = [
     {

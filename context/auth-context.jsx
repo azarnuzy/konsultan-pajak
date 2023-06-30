@@ -16,15 +16,11 @@ export function AuthProvider({ children }) {
   const [previousPath, setPreviousPath] = useState('/')
   // customer data
   const [user, setUser] = useState()
-  // const [whoAmI, setWhoAmI] = useState()
 
-  // user data
   const [userData, setUserData] = useState()
 
   const [showUpload, setShowUpload] = useState(false)
   const [profileImage, setProfileImage] = useState()
-
-  // const [isRenderFirst, setIsRenderFirst] = useState(false)
 
   const [consultRequest, setConsultRequest] = useState()
   const [consultOngoing, setConsultOngoing] = useState()
@@ -38,7 +34,6 @@ export function AuthProvider({ children }) {
     setOpen(false)
     window.clearTimeout(timerRef.current)
     timerRef.current = window.setTimeout(() => {
-      // eventDateRef.current = oneWeekAway()
       setOpen(true)
     }, 100)
   }
@@ -51,7 +46,6 @@ export function AuthProvider({ children }) {
         },
       })
       .then((response) => {
-        // console.log(response)
         setData(response.data.data)
       })
       .catch((error) => {
@@ -60,7 +54,6 @@ export function AuthProvider({ children }) {
   }
 
   const getWhoAmI = async () => {
-    // console.log(token)
     await axios
       .get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/whoami`, {
         headers: {
@@ -68,28 +61,20 @@ export function AuthProvider({ children }) {
         },
       })
       .then((response) => {
-        // console.log(response, !pathname.startsWith('/admin/'))
-        // console.log(response)
-        // console.log(response, pathname)
         if (!router.pathname.startsWith('/admin/')) {
-          // console.log(response.data.role_id)
           if (
             response.data.data.role_id === 1 ||
             response.data.data.role_id === 2
           ) {
             router.push('/admin')
-            // localStorage.set('isFirstRender', true);
-            // setIsRenderFirst(true)
           }
         }
-        // setWhoAmI(response.data)
+
         Cookies.set('whoami', JSON.stringify(response.data), {
           expires: 3,
         })
       })
-      .catch((error) => {
-        // console.log(error)
-      })
+      .catch((error) => {})
   }
 
   useEffect(() => {
@@ -107,7 +92,6 @@ export function AuthProvider({ children }) {
             },
           })
           .then((response) => {
-            // console.log(response)
             setUser(response.data.data)
             return response
           })
@@ -145,7 +129,6 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     if (user) {
-      // console.log(user._links)
       getConsultCustomer(
         user?._links?.['consult-request']?.href,
         setConsultRequest
@@ -165,34 +148,29 @@ export function AuthProvider({ children }) {
       const res = await axios
         .post(url, data)
         .then((response) => {
-          // console.log(response)
           if (response.data) {
-            const { token } = response.data.data
-            // console.log(token)
+            const { token, imagekit_url, role_id } = response.data.data
             setToken(token)
-            // setUserId(userId)
             Cookies.set('token', token, {
               expires: 3,
             })
+            localStorage.setItem('role_id', role_id)
+            localStorage.setItem('imagekit_url', imagekit_url)
             getWhoAmI()
           }
-          // console.log(response)
-          return response
-          // return response
+          return response.data
         })
         .catch((err) => {
           console.log(err)
-          // return err
+          return err.response
         })
-      // console.log(res)
-      // return res
+      return res
     } catch (error) {
-      console.log(error)
+      return error
     }
   }
 
   const logout = () => {
-    // console.log('logout')
     setToken(null)
     setUser({})
     setToken()
@@ -203,11 +181,12 @@ export function AuthProvider({ children }) {
     // setWhoAmI()
     Cookies.remove('token')
     Cookies.remove('whoami')
+    localStorage.removeItem('role_id')
+    localStorage.removeItem('imagekit_url')
     router.push('/')
   }
 
   const handleUploadImage = (e) => {
-    // console.log(e)
     setProfileImage(e.target.files[0])
     setShowUpload(true)
   }

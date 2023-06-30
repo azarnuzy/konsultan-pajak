@@ -23,7 +23,7 @@ function OurClient() {
       } else if (screenWidth >= 768 && screenWidth < 1024) {
         newSlidesPerView = 6 // tablet
       } else if (screenWidth >= 1024) {
-        newSlidesPerView = 8 // desktop
+        newSlidesPerView = 7 // desktop
       }
 
       setSlidesPerView(newSlidesPerView)
@@ -51,15 +51,20 @@ function OurClient() {
         modules={[Navigation]}
         slidesPerView={slidesPerView}
         spaceBetween={30}
-        className='mySwiper px-16'
+        className='mySwiper'
       >
         {data.map((item, i) => (
           <SwiperSlide
             key={i}
-            className='mx-2 sm:mx-5'
+            className=''
           >
             <div className='w-[156px] h-[156px] flex items-center justify-center bg-light-gray '>
-              <Image src={`/images/clients/${item.logo}`} alt={item.name} width={156} height={156}/>
+              <Image
+                src={`/images/clients/${item.logo}`}
+                alt={item.name}
+                width={156}
+                height={156}
+              />
             </div>
           </SwiperSlide>
         ))}

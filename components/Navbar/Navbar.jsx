@@ -70,7 +70,6 @@ function Navbar() {
                         className='rounded-full h-12 w-12'
                       />
                     </div>
-                    {/* <HiUserCircle className='h-12 w-12 bg-white cursor-pointer rounded-full text-darkBlue' /> */}
                   </button>
                   <Transition
                     show={isProfileOpen}

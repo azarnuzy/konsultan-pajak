@@ -45,7 +45,7 @@ function Content() {
         </div>
       </div>
       <div className='flex flex-col sm:flex-row items-center gap-8'>
-        <div className='text-light-dark px-8'>
+        <div className='text-light-dark px-8  md:w-3/4'>
           <p className='block mb-3'>{data.content2.description.p1}</p>
           <p className='block'> {data.content2.description.p2}</p>
         </div>
