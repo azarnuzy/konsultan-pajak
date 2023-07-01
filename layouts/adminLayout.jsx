@@ -15,7 +15,8 @@ const AdminLayout = ({ children }) => {
 
   const router = useRouter()
   useEffect(() => {
-    const role_id = localStorage.getItem('role_id')
+    const role_id = JSON.parse(localStorage.getItem('role_id'))
+
     if (role_id === 3) {
       router.push('/')
     }
