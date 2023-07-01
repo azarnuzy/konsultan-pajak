@@ -95,7 +95,7 @@ function Login() {
         }
       }
 
-      // console.log(response?.data)
+      console.log(response?.data)
       if (response?.data.role_id === 3) {
         router.push('/')
       } else if (response?.data.role_id === 1 || response?.data.role_id === 2) {

@@ -16,7 +16,7 @@ const AdminLayout = ({ children }) => {
   const router = useRouter()
   useEffect(() => {
     const role_id = localStorage.getItem('role_id')
-    if (role_id !== 1 || role_id !== 2) {
+    if (role_id === 3) {
       router.push('/')
     }
     setIsMounted(true)
