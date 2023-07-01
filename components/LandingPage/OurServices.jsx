@@ -1,5 +1,6 @@
 import { ourService } from '@/helpers/landingPageData'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 function OurServices() {
@@ -30,6 +31,14 @@ function OurServices() {
             <span className=''>{item.description}</span>
           </div>
         ))}
+      </div>
+      <div className='w-full flex justify-center my-5'>
+        <Link
+          href='/our-services'
+          className='bg-blue-700 text-white w-[150px] py-3 text-center rounded-md font-bold px-3'
+        >
+          Read More...
+        </Link>
       </div>
     </div>
   )

@@ -230,3 +230,67 @@ export const footer = {
     },
   },
 }
+
+export const asistenPajak = [
+  {
+    title: 'Jasa Asistensi Pemeriksaan Pajak',
+    description:
+      'Pekerjaaan asistensi ini mencakup antara lain membantu menyiapkan dokumen untuk pemeriksaan pajak, menjelaskan dan menjawab pertanyaan pemeriksa, hingga memberikan tanggapan dan diskusi hasil pemeriksaan dengan pemeriksa pajak.',
+  },
+  {
+    title: 'Jasa Asistensi Keberatan Pajak',
+    description:
+      'Kami akan mendampingi klien mulai dari menyiapkan surat keberatan, menyiapkan dokumen yang diminta penelaah keberatan hingga menemui penelaah keberatan untuk menjelaskan keberatan yang diajukan klien.',
+  },
+  {
+    title: 'Jasa Asistensi Banding Pajak',
+    description:
+      'Dalam proses banding ini, kami akan membantu klien dalam menyiapkan surat banding, membuat surat bantahan, menyiapkan bukti di pengadilan hingga beracara sebagai kuasa hukum di Pengadilan Pajak.',
+  },
+]
+
+export const jasaKepatuhan = {
+  title: 'Jasa Kepatuhan / Compilance Pajak',
+  description:
+    'Budi Indratno Tax Solution memberikan jasa kepatuhan pajak untuk membantu wajib pajak mematuhi ketentuan perpajakannya',
+  list: [
+    'Menyiapkan perhitungan pajak',
+    'Melaporkan SPT Masa atau Tahunan ',
+    'Mengurus pembayaran pajak ',
+    'Pengurusan Restitusi/ Pengembalian pajak',
+    'Menandatangani laporan pajak.atas nama klien',
+  ],
+}
+
+export const advisorPajak = {
+  title: 'Jasa Advisory Pajak',
+  description:
+    'Jasa konsultasi pajak meliputi bantuan kepada klien untuk mencapai pemahaman yang baik di bidang perpajakan, serta menciptakan manajemen pajak yang efektif,',
+}
+
+export const listAdvisorPajak = [
+  {
+    logo: 'consultation.svg',
+    title: 'Tax Consulting',
+    description:
+      'Bimbingan untuk wajib pajak agar patuh perpajakan secara efisien, menjelaskan peraturan terbaru, dan membantu klarifikasi surat himbauan kantor pajak.',
+  },
+  {
+    logo: 'planning.svg',
+    title: 'Tax Planning',
+    description:
+      'Program perencanaan perpajakan kami membantu klien mencapai efisiensi dan efektivitas pajak, mengurangi risiko kesalahan dan sanksi/denda, serta menyelaraskan manajemen perpajakan dengan kebijakan keuangan klien.',
+  },
+  {
+    logo: 'bill.svg',
+    title: 'Tax Bill',
+    description:
+      'Jasa telaah pajak mengevaluasi transaksi perusahaan selama setahun, mereview kewajiban dan hak perpajakan dari transaksi normal dan khusus.',
+  },
+  {
+    logo: 'tax.svg',
+    title: 'Tax Attorney',
+    description:
+      'Kuasa hukum pajak mendampingi para pihak dalam sengketa perpajakan di Pengadilan Pajak untuk mempercepat proses peradilan.',
+  },
+]
